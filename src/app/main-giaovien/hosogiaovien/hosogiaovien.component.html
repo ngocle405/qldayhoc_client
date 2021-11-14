@@ -1,0 +1,222 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+           
+            <!-- /.col -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="modal" (click)="onEdit(gv.magv)" data-target="#exampleModal"
+                                data-backdrop="static" data-keyboard="false">Hồ sơ cá
+                                    nhân</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li> -->
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="activity">
+
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Mã giáo viên</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.magv" id="inputEmail4">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Họ và tên </label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.tengv"
+                                            id="inputPassword4">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Email</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.email" id="inputEmail4">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Địa chỉ nhà</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.diachi"
+                                            id="inputPassword4">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Điện thoại</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.dienthoai"
+                                            id="inputEmail4">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">căn cước</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.cmnd"
+                                            id="inputPassword4">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Dân tộc</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.dantoc"
+                                            id="inputEmail4">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Tôn giáo</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.tongiao"
+                                            id="inputPassword4">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Tốt ngiệp trường</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.totnghieptruong"
+                                            id="inputEmail4">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Ngaỳ tốt nghiệp</label>
+                                        <input type="date" class="form-control" [(ngModel)]="gv.ngaytotnghiep"
+                                            id="inputPassword4">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Chức danh kĩ thuật</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.chucdanhkythuat"
+                                            id="inputEmail4">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">QUốc tịch</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.quoctich"
+                                            id="inputPassword4">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Bằng cấp</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.bangcap"
+                                            id="inputEmail4">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Chuyên ngành</label>
+                                        <input type="text" class="form-control" [(ngModel)]="gv.chuyennganh"
+                                            id="inputPassword4">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <!-- /.tab-pane -->
+
+
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" style="width:70%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin sinh viên</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Mã sinh viên</label>
+                        <input type="text" class="form-control" [(ngModel)]="magv" id="inputEmail4">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Họ và tên </label>
+                        <input type="text" class="form-control" [(ngModel)]="tengv" id="inputPassword4">
+                    </div>
+        
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Email</label>
+                            <input type="text" class="form-control" [(ngModel)]="email" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Địa chỉ nhà</label>
+                            <input type="text" class="form-control" [(ngModel)]="diachi" id="inputPassword4">
+                        </div>
+               
+                   
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Điện thoại</label>
+                            <input type="text" class="form-control" [(ngModel)]="dienthoai" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">căn cước</label>
+                            <input type="text" class="form-control" [(ngModel)]="cmnd" id="inputPassword4">
+                        </div>
+                
+                   
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Dân tộc</label>
+                            <input type="text" class="form-control" [(ngModel)]="dantoc" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Tôn giáo</label>
+                            <input type="text" class="form-control" [(ngModel)]="tongiao" id="inputPassword4">
+                        </div>
+                    
+                  
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">tốt nghiệp truòng</label>
+                            <input type="text" class="form-control" [(ngModel)]="totnghieptruong" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">ngày tốt nghiệp</label>
+                            <input type="date" class="form-control" [(ngModel)]="ngaytotnghiep" id="inputPassword4">
+                        </div>
+               
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">chức danh kĩ thuật</label>
+                            <input type="text" class="form-control" [(ngModel)]="chucdanhkythuat" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">QUốc tịch</label>
+                            <input type="text" class="form-control" [(ngModel)]="quoctich" id="inputPassword4">
+                        </div>
+                 
+                   
+                     
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Chuyên ngành</label>
+                            <input type="text" class="form-control" [(ngModel)]="chuyennganh" id="inputPassword4">
+                        </div>
+                    
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Ngày sinh</label>
+                            <input type="date" class="form-control" [(ngModel)]="ngaysinh" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">trinhdohocvan</label>
+                            <input type="text" class="form-control" [(ngModel)]="trinhdohocvan" id="inputEmail4">
+                        </div>
+                    
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Upload</label>
+                            <input type="file" (change)="uploadPhoto($event)" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+           
+                <div class="modal-footer">
+                    <button aria-label="Close" data-dismiss="modal" type="button" class="btn btn-default">Close</button>
+                    <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>

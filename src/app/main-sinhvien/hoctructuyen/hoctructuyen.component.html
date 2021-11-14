@@ -1,0 +1,110 @@
+<div class="card">
+
+    <div class="card-body">
+        <div class="tab-content">
+            <div class="tab-pane active">
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row mb-1">
+                            <div class="col-sm-7">
+                                <h3 class="text-primary">Học trực tuyến</h3>
+                            </div>
+                            <div class="col-sm-5" style="display: flex;">
+                                <input class="form-control" autocomplete="off" type="search" [(ngModel)]="txtSearchName"
+                                    placeholder="Tìm kiếm tại đây...">
+                                <button type="button" (click)="onSearch()" class="btn btn-primary">
+                                    <i class="fas fa-search fa-fw"></i></button>
+                            </div>
+                        </div>
+                        <div class="row mb-1 mt-3">
+                            <div class="col-sm-4">
+                                <label class="mr-1">Hiển thị </label>
+                                <select class="form-control form-control-sm mr-1" [(ngModel)]="pageSize"
+                                    (ngModelChange)="loadData(1)" style="width: 100px;display: inline!important;">
+
+                                    <option [value]="3">3</option>
+                                    <option [value]="5">5</option>
+                                    <option [value]="10">10</option>
+                                    <option [value]="20">20</option>
+                                    <option [value]="25">25</option>
+                                    <option [value]="30">30</option>
+                                </select>
+                                <label> dòng</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="mr-1">Sắp xếp theo tên </label>
+                                <select class="form-control form-control-sm mr-1" [(ngModel)]="sortByName"
+                                    (ngModelChange)="loadData(1)" style="width: 100px;display: inline!important;">
+
+                                    <option [value]="'asc'">Tăng dần</option>
+                                    <option [value]="'desc'">Giảm dần</option>
+                                    <option [value]="'reset'">Reset</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4" style="float: right;">
+                                <label class="mr-1">Sắp xếp theo ngày tạo </label>
+                                <select class="form-control form-control-sm mr-1" (ngModelChange)="loadData(1)"
+                                    style="width: 100px;display: inline!important;">
+                                    <option [value]="'desc'">Mới nhất</option>
+                                    <option [value]="'asc'">Cũ nhất</option>
+                                    <option [value]="'reset'">Reset</option>
+                                </select>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+
+                                        <th scope="col">Mã lớp</th>
+
+                                        <th scope="col">học phần</th>
+                                        <th scope="col">Tiết học </th>
+                                        <th scope="col">Năm học</th>
+                                        <th scope="col">Giáo viên </th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let i = index;let item of loptructuyens">
+                                        <td>{{ i + 1 }}</td>
+
+                                        <td>{{item.malop}} ( {{item.ghichu}} )</td>
+
+                                        <td>{{item.tenhp}}</td>
+                                        <td>{{item.tiethoc}}</td>
+                                        <td>{{item.namhoc }}</td>
+                                        <td>{{item.tengv }}</td>
+                                        <td style="width: 100px;">
+
+                                            <a href="https://www.microsoft.com/vi-vn/microsoft-teams/log-in"
+                                                target="_blank"> <img src="./assets/dist/img/unnamed.png"
+                                                    title="chuyển sang ms team" style="width:50%" alt=""></a>
+                                            <img src="./assets/dist/img/avatar5.png"
+                                                title="Giáo viện được phân công dạy {{item.tengv}}" style="width:50%"
+                                                alt="">
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page"
+                            [boundaryLinks]="true" [maxSize]="10" [rotate]="true" (pageChange)="loadData($event)">
+                        </ngb-pagination>
+                    </div>
+                    <!--/. container-fluid -->
+                </section>
+            </div>
+
+        </div>
+        <!-- /.tab-content -->
+    </div><!-- /.card-body -->
+</div>
+<!-- /.card -->

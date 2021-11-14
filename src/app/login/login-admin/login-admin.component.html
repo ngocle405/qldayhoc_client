@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AdminLTE 3 | Log in admin</title>
+
+    <!-- Google Font: Source Sans Pro -->
+
+</head>
+<div class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Đăng nhập để vào hệ thống .</p>
+
+                <form [formGroup]="formLogin" (ngSubmit)="onLogin()">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="" formControlName="username" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="alert alert-danger" role="alert"
+                        *ngIf="formLogin.controls.username?.errors?.required && formLogin.controls.username?.touched">
+                        Tài khoản không được để trống!
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="" formControlName="password"
+                            placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" role="alert"
+                        *ngIf="formLogin.controls.password?.errors?.required && formLogin.controls.password?.touched">
+                        Mật khẩu không được để trống!
+                    </div>
+                   
+                    <input type="submit" [disabled]="!formLogin.valid" class="form-control" value="Log in">
+                </form>
+
+
+                <!-- /.social-auth-links -->
+
+
+            </div>
+            <!-- /.login-card-body -->
+
+
+        </div>
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,23 @@
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let item of lopdays">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{item.malop}} - {{item.tenhp}}</h5>
+            <p class="card-text">
+              {{item.tengv}} / {{item.namhoc}}
+            </p>
+            <p class="card-text">
+              {{item.tiethoc}}
+            </p>
+            <a routerLink="/sinhvien/chitietlophoc/{{item.mahoctap}}" class="btn btn-primary">Truy cập vào</a>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-6 -->
+      <!-- /.col-md-6 -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>

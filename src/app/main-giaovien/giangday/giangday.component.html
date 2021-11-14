@@ -1,0 +1,557 @@
+<div class="card">
+  
+  <div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane active">
+
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+        
+              <!-- /.col -->
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                      <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Thông tin lớp</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Bài giảng</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Tài liệu học </a></li>
+                      <li class="nav-item"><a class="nav-link" href="#baitap" data-toggle="tab">Bài tập </a></li>
+                      <li class="nav-item"><a class="nav-link" href="#thaoluans" data-toggle="tab">Thảo luận </a></li>
+                    </ul>
+                  </div><!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="tab-content">
+                      <div class="active tab-pane" id="activity">
+                        <div class="time-label">
+                          <!-- <span class="bg-danger">
+                              10 Feb. 2014
+                            </span> -->
+                          <button type="button" class="bg-primary btn" data-toggle="modal" data-target="#exampleModal4"
+                            data-backdrop="static" data-keyboard="false">
+                            Add
+                          </button>
+                        </div>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <div>
+                          <div class="table-responsive">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+        
+                                  <th scope="col">Tiêu đề</th>
+        
+                                  <th scope="col">ma lop</th>
+                                  <th scope="col">ten hp</th>
+        
+                                  <th scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let i = index;let item of sv">
+                                  <td>{{ i + 1 }}</td>
+        
+                                  <td >{{item.tensv}}</td>
+        
+                                  <td>{{item.malop}}</td>
+                                  <td>{{item.tenhp }}</td>
+                                 
+        
+        
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.tab-pane -->
+                      <div class="tab-pane" id="timeline">
+                        <!-- The timeline -->
+                        <div class="timeline timeline-inverse">
+                          <!-- timeline time label -->
+                          <div class="time-label">
+                            <!-- <span class="bg-danger">
+                                10 Feb. 2014
+                              </span> -->
+                            <button type="button" class="bg-primary btn" data-toggle="modal" data-target="#exampleModal"
+                              data-backdrop="static" data-keyboard="false">
+                              Add
+                            </button>
+                          </div>
+                          <!-- /.timeline-label -->
+                          <!-- timeline item -->
+                          <div>
+                            <div class="table-responsive">
+                              <table class="table table-hover">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+        
+                                    <th scope="col">Tiêu đề</th>
+        
+                                    <th scope="col">Ngày đăng</th>
+                                    <th scope="col">SỐ tiết</th>
+        
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let i = index;let item of baigiangs">
+                                    <td>{{ i + 1 }}</td>
+        
+                                    <td style="width:300px;">{{item.tieude}}</td>
+        
+                                    <td>{{item.ngaytao| date:'dd - MM - yyyy'}}</td>
+                                    <td>{{item.sotiet }}</td>
+                                    <td>
+                                      <a href="{{item.filelink}}" title="Nhấn vào link " target="_blank"
+                                        class="btn btn-primary"><i class="fa fa-link"></i></a> |
+                                      <button type="button" class="btn btn-primary" (click)="deleteBaigiang(item)"><i
+                                            class="fa fa-trash"></i></button>
+        
+        
+                                    </td>
+        
+        
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.tab-pane -->
+        
+                      <div class="tab-pane" id="settings">
+                        <div class="row mb-1">
+                          <div class="col-sm-9">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1"
+                              data-backdrop="static" data-keyboard="false">
+                              Add
+                            </button>
+                            <!-- (click)="clearFormAdd()" -->
+                          </div>
+                          <!-- <div class="col-sm-3" style="display: flex;">
+                                <input class="form-control" autocomplete="off"  type="search" 
+                                    [(ngModel)]="txtSearchName" placeholder="Tìm kiếm tại đây...">
+                                <button type="button" (click)="onSearch()" class="btn btn-success">
+                                    <i class="fas fa-search fa-fw"></i></button>
+                                   
+                            </div> -->
+                        </div>
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+        
+                                <th scope="col">Filename</th>
+        
+                                <th scope="col">Ngày đăng</th>
+                                <th scope="col">Người đăng</th>
+        
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let i = index;let item of tailieus">
+                                <td>{{ i + 1 }}</td>
+        
+                                <td>{{item.tentailieu}}</td>
+        
+                                <td>{{item.ngaytao| date:'dd - MM - yyyy'}}</td>
+                                <td>{{item.nguoitao }}</td>
+                                <td>
+                                  <a href="http://localhost:44169/photos/tailieu/{{item.filename}}" target="_blank"
+                                    class="btn btn-primary"><i class="fa fa-download"></i></a> |
+                                  <button (click)="deleteTailieu(item)" class="btn btn-primary">
+                                    <i class="fas fa-trash"></i></button>
+                                </td>
+        
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="baitap">
+                        <div class="row mb-1">
+                          <div class="col-sm-9">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2"
+                              data-backdrop="static" data-keyboard="false">
+                              Add 
+                            </button>
+                            <!-- (click)="clearFormAdd()" -->
+                          </div>
+                          <!-- <div class="col-sm-3" style="display: flex;">
+                                <input class="form-control" autocomplete="off"  type="search" 
+                                    [(ngModel)]="txtSearchName" placeholder="Tìm kiếm tại đây...">
+                                <button type="button" (click)="onSearch()" class="btn btn-success">
+                                    <i class="fas fa-search fa-fw"></i></button>
+                                   
+                            </div> -->
+                        </div>
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tên bài tập</th>
+        
+        
+                                <th scope="col">Ngày đăng</th>
+                                <th scope="col">Người đăng</th>
+        
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let i = index;let item of baitaps">
+                                <td>{{ i + 1 }}</td>
+        
+                                <td>{{item.tenbt}}</td>
+        
+                                <td>{{item.ngaytao| date:'dd - MM - yyyy'}}</td>
+                                <td>{{item.nguoitao }}</td>
+                                <td>
+                                  <a href="http://localhost:44169/photos/baitap/{{item.filename}}" target="_blank"
+                                    class="btn btn-primary"><i class="fa fa-download"></i></a> |
+                                  <button (click)="deleteBaitap(item)" class="btn btn-primary" >
+                                    <i class="fas fa-trash"></i></button> |
+                                    <a routerLink="/giaovien/baitapdanop/{{item.mabt}}" class="btn btn-primary"><i class="fa fa-file"></i></a>
+                                </td>
+        
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <!-- /.tab-pane -->
+                      <div class="tab-pane" id="thaoluans">
+                        <div class="row mb-1">
+                          <div class="col-sm-9">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3"
+                              data-backdrop="static" data-keyboard="false">
+                              Add 
+                            </button>
+                            <!-- (click)="clearFormAdd()" -->
+                          </div>
+                          <!-- <div class="col-sm-3" style="display: flex;">
+                                <input class="form-control" autocomplete="off"  type="search" 
+                                    [(ngModel)]="txtSearchName" placeholder="Tìm kiếm tại đây...">
+                                <button type="button" (click)="onSearch()" class="btn btn-success">
+                                    <i class="fas fa-search fa-fw"></i></button>
+                                   
+                            </div> -->
+                        </div>
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tiêu đề</th>
+                                <th scope="col">Nội dung</th>
+                                <th scope="col">Ngày tạo</th>
+                                <th scope="col">Người tạo</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let i = index;let item of thaoluans">
+                                <td>{{ i + 1 }}</td>
+        
+                                <td>{{item.tieude}}</td>
+                                <td>{{item.noidung}}</td>
+                                <td>{{item.ngaytao| date:'dd - MM - yyyy'}}</td>
+                                <td>{{item.nguoitao }}</td>
+                                <td>
+                                  <!-- <a href="http://localhost:44169/photos/baitap/{{item.filename}}" target="_blank"
+                                    class="btn btn-primary"><i class="fa fa-download"></i></a> | -->
+                                  <button (click)="deleteThaoluan(item)" class="btn btn-primary">
+                                    <i class="fas fa-trash"></i></button>
+                                </td>
+        
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.tab-content -->
+                  </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        
+        </section>
+        
+      </div>
+
+    </div>
+    <!-- /.tab-content -->
+  </div><!-- /.card-body -->
+</div>
+
+
+<!-- modal bài giảngt -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" style="width:40%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Bài giảng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="" [formGroup]="formAddBaiGiang">
+          <div class="form-group">
+            <div class="form-group">
+              <label> Tiêu đề:</label>
+              <input type="text" class="form-control" formControlName="tieude" placeholder="Nhập tiêu đề bài viết">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label> số tiết:</label>
+              <input type="text" class="form-control" formControlName="sotiet" placeholder="Nhập số tiết">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label> Link tài liệu:</label>
+              <input type="text" class="form-control" formControlName="filelink"
+                placeholder="Nhập link tài liệu (nếu có)">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="exampleInputEmail1">nội dung :</label>
+            <textarea name="" id="" class="form-control" formControlName="noidung" rows="3"
+              placeholder="Thêm nội dung"></textarea>
+          </div>
+          <label style="float: left;color: #007bff;" for="">Người tạo : {{teacher.tengv}}</label>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+          class="btn btn-default">Close</button>
+        <button type="button" (click)="addBaigiang()" [disabled]="!formAddBaiGiang.valid" class="btn btn-primary">Thêm
+          mới</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+<!-- // 2 model tài liệu -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" style="width:40%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm tài liệu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">tên tài liệu :</label>
+            <input type="text" class="form-control" [(ngModel)]="tentailieu" placeholder="nhap noi dung">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">link tài liệu :</label>
+            <input type="text" class="form-control" [(ngModel)]="filelink" placeholder="link tài liệu (nếu có)">
+          </div>
+          <div class="form-row">
+            <label for="exampleInputEmail1">Mo ta :</label>
+            <textarea class="form-control" [(ngModel)]="mota" rows="3" placeholder="Thêm mô ta"></textarea>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label> filename:</label>
+              <input type="file" class="form-control" (change)="uploadFile($event)" id="inputSkills">
+            </div>
+          </div>
+          <label style="float: left;color: #007bff;" for="">Người tạo : {{teacher.tengv}}</label>
+      </div>
+      <div class="modal-footer">
+        <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+          class="btn btn-default">Close</button>
+        <button type="button"  (click)="addTailieu()" class="btn btn-primary">Thêm
+          mới</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- đóng -->
+
+
+<!-- // modal bài tập -->
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" style="width:40%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Bài tập</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <div class="form-group">
+              <label> Tên bài tập:</label>
+              <input type="text" class="form-control" [(ngModel)]="tenbt" placeholder="Nhập tên bt">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label> Link tài liệu:</label>
+              <input type="text" class="form-control" [(ngModel)]="filelink"
+                placeholder="Nhập link tài liệu (nếu có)">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label> filename:</label>
+              <input type="file" class="form-control" (change)="uploadBaitap($event)" id="inputSkills">
+            </div>
+          </div>
+          <label style="float: left;color: #007bff;" for="">Người tạo : {{teacher.tengv}}</label>
+      </div>
+      <div class="modal-footer">
+        <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+          class="btn btn-default">Close</button>
+        <button type="button" (click)="addBaitap()" class="btn btn-primary">Thêm
+          mới</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+<!-- modal thảo luận -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" style="width:40%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Bài thảo luận </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="" [formGroup]="formAddThaoluan">
+          <div class="form-group">
+            <div class="form-group">
+              <label> Tiêu đề:</label>
+              <input type="text" class="form-control" formControlName="tieude" placeholder="Nhập tiêu đề bài thaỏ luận">
+            </div>
+          </div>
+       
+          <div class="form-row">
+            <label for="exampleInputEmail1">nội dung :</label>
+            <textarea name="" id="" class="form-control" formControlName="noidung" rows="3"
+              placeholder="Thêm nội dung"></textarea>
+          </div>
+          <label style="float: left;color: #007bff;" for="">Người tạo : {{teacher.tengv}}</label>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+          class="btn btn-default">Close</button>
+        <button type="button" (click)="addThaoluan()" [disabled]="!formAddThaoluan.valid" class="btn btn-primary">Thêm
+          mới</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" style="width:40%" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm sv</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+
+                  <th scope="col">Tiêu đề</th>
+
+                  <th scope="col">ma lop</th>
+               
+
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let i = index;let item of loadsvlop">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{item.tensv}}</td>
+                  <td>{{item.malop}}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary" (click)="onEdit(item.masv)" data-toggle="modal"
+                      data-target="#exampleModal5">
+                      Add
+                    </button>
+                  </td>
+                
+                
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+      </div>
+    
+    </div>
+  </div>
+</div>
+<!--  -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        Thêm sinh viên này vào lớp ?
+        <form [formGroup]="formEdit" >
+          <input type="hidden" formControlName="masv" > 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="addsv()">Thêm vào</button>
+          </div>
+        </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>
+
+<p-confirmDialog [style]="{width: '50vw'}" rejectButtonStyleClass="p-button-text">
+
+</p-confirmDialog>
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="line-spin-fade-rotating" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner> -->

@@ -1,0 +1,278 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <h4 class="page-title">Quản lý học phần </h4>
+                </div>
+
+            </div> <!-- end row -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <!-- <h4 class="mt-0 header-title mb-4">Suppliers</h4> -->
+                            <div class="row mb-1">
+                                <div class="col-sm-9">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="clearFormAdd()"
+                                        data-backdrop="static" data-keyboard="false">
+                                        Add
+                                    </button>
+                                </div>
+                                <div class="col-sm-3" style="display: flex;">
+                                    <input class="form-control" autocomplete="off"  type="search" value="{{txtSearchName}}"
+                                        [(ngModel)]="txtSearchName" placeholder="Tìm kiếm tại đây...">
+                                    <button type="button" (click)="onSearch()" class="btn btn-success">
+                                        <i class="fas fa-search fa-fw"></i></button>
+                                       
+                                </div>
+                            </div>
+                            <div class="row mb-1 mt-3">
+                                <div class="col-sm-4">
+                                    <label class="mr-1">Hiển thị </label>
+                                    <select class="form-control form-control-sm mr-1" [(ngModel)]="pageSize"
+                                        (ngModelChange)="loadData(1)" style="width: 100px;display: inline!important;">
+
+                                        <option [value]="3">3</option>
+                                        <option [value]="5">5</option>
+                                        <option [value]="10">10</option>
+                                        <option [value]="20">20</option>
+                                        <option [value]="25">25</option>
+                                        <option [value]="30">30</option>
+                                    </select>
+                                    <label> dòng</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="mr-1">Sắp xếp theo tên </label>
+                                    <select class="form-control form-control-sm mr-1" [(ngModel)]="sortByName"
+                                        (ngModelChange)="loadData(1)" style="width: 100px;display: inline!important;">
+                                        
+                                        <option [value]="'asc'">Tăng dần</option>
+                                        <option [value]="'desc'">Giảm dần</option>
+                                        <option [value]="'reset'">Reset</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4" style="float: right;">
+                                    <label class="mr-1">Sắp xếp theo ngày tạo </label>
+                                    <select class="form-control form-control-sm mr-1" 
+                                        (ngModelChange)="loadData(1)" style="width: 100px;display: inline!important;">
+                                        <option [value]="'desc'">Mới nhất</option>
+                                        <option [value]="'asc'">Cũ nhất</option>
+                                        <option [value]="'reset'">Reset</option>
+                                    </select>
+                                </div>
+                              
+                             
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+
+                                            <th scope="col">Code</th>
+                                            <th scope="col">Tên học phần</th>
+                                            <th scope="col">Học kỳ</th>
+                                            <th scope="col">Số tc</th>
+                                            <th scope="col">Tiêu đề</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let i = index;let item of hocphans">
+                                            <td>{{ i + 1 }}</td>
+
+                                            <td>{{item.code}}</td>
+                                            <td>{{item.tenhp}}</td>
+                                            <td>Học kỳ {{item.hocky}}</td>
+                                            <td>{{item.sotc}}</td>
+                                            <td>{{item.tieude}}</td>
+                                            <!-- <td>
+                                                <span *ngIf="item.status;else unactive"
+                                                    class="badge badge-success">Active</span>
+                                                <ng-template #unactive>
+                                                    <span class="badge badge-danger">Unactive</span>
+                                                </ng-template>
+                                            </td> -->
+                                            <td>
+                                                <button type="button" class="btn btn-default mr-1" data-toggle="modal"
+                                                    data-target="#exampleModal1" (click)="onEdit(item.mahp)"><i
+                                                        class="fa fa-edit" style="color:red"></i></button>
+                                                <button type="button" class="btn btn-default"
+                                                    (click)="deleteClick(item)"><i class="fa fa-trash"
+                                                        style="color:red"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [boundaryLinks]="true"
+                                [maxSize]="10" [rotate]="true" (pageChange)="loadData($event)">
+                            </ngb-pagination>
+                            <!-- <pagination-controls (pageChange)="page = $event"></pagination-controls> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page-title -->
+    </div>
+    <!-- container-fluid -->
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm học phần</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="" [formGroup]="formAdd">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="exampleInputEmail1">Code :</label>
+                            <input type="text" class="form-control" formControlName="code" placeholder="code">
+                            <span class="text-danger" role="alert"
+                                *ngIf="formAdd.controls.code?.errors?.required && formAdd.controls.code?.touched">
+                                Mã code không được để trống!
+                            </span>
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputEmail1">Tên học phần :</label>
+                            <input type="text" class="form-control" formControlName="tenhp" placeholder="tên học phần">
+                            <span class="text-danger" role="alert"
+                                *ngIf="formAdd.controls.tenhp?.errors?.required && formAdd.controls.tenhp?.touched">
+                                Tên đầy đủ không được để trống!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="exampleInputEmail1">số tín chỉ :</label>
+                            <input type="number" class="form-control" formControlName="sotc" placeholder="số tín chỉ">
+                            <span class="text-danger" role="alert"
+                                *ngIf="formAdd.controls.sotc?.errors?.required && formAdd.controls.sotc?.touched">
+                                Số tín chỉ không được để trống!
+                            </span>
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputEmail1">Hệ số :</label>
+                            <input type="number" class="form-control" formControlName="heso" placeholder="hệ số">
+                            <span class="text-danger" role="alert"
+                                *ngIf="formAdd.controls.heso?.errors?.required && formAdd.controls.heso?.touched">
+                                Hệ số không được để trống!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tiêu đề :</label>
+                        <input type="text" class="form-control" formControlName="tieude" placeholder="Tiêu đề">
+                        <span class="text-danger" role="alert"
+                            *ngIf="formAdd.controls.tieude?.errors?.required && formAdd.controls.tieude?.touched">
+                            Tiêu đề không được để trống!
+                        </span>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label for="exampleInputEmail1">ghi chú:</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="ghichu"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Học kì:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" formControlName="hocky" [value]="1">
+                                <label class="form-check-label">
+                                    Học kì 1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" formControlName="hocky" [value]="2">
+                                <label class="form-check-label">
+                                    Học kì 2
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="add()" [disabled]="!formAdd.valid" class="btn btn-primary">Thêm
+                    mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa môn học</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <label for="exampleInputEmail1">Code :</label>
+                <input type="text" class="form-control" [(ngModel)]="code" placeholder="code">
+                <label for="exampleInputEmail1">Tên học phần :</label>
+                <input type="text" class="form-control" [(ngModel)]="tenhp" placeholder="tên học phần">
+
+                <label for="exampleInputEmail1">số tín chỉ :</label>
+                <input type="number" class="form-control" [(ngModel)]="sotc" placeholder="số tín chỉ">
+
+                <label for="exampleInputEmail1">Hệ số :</label>
+                <input type="number" class="form-control" [(ngModel)]="heso" placeholder="hệ số">
+
+                <label for="exampleInputEmail1">Tiêu đề :</label>
+                <input type="text" class="form-control" [(ngModel)]="tieude" placeholder="Tiêu đề">
+
+                <label for="exampleInputEmail1">ghi chú:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="ghichu"
+                    rows="3">{{ghichu}}</textarea>
+                <div class="form-group">
+                    <label>Học kì:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" [(ngModel)]="hocky" [value]="1">
+                        <label class="form-check-label">
+                            Học kì 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" [(ngModel)]="hocky" [value]="2">
+                        <label class="form-check-label">
+                            Học kì 2
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#ffbe76" type="pacman">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}" rejectButtonStyleClass="p-button-text">
+
+</p-confirmDialog>
