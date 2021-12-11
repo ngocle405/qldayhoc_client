@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HocphanService } from 'src/app/services/hocphan.service';
+
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuanlythongtinService } from 'src/app/services/quanlythongtin.service';
 @Component({
   selector: 'app-hocphan',
   templateUrl: './hocphan.component.html',
@@ -15,8 +16,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HocphanComponent implements OnInit {
   formAdd !: FormGroup ;
-
-
+  formEdit !:FormGroup;
+  id_Edit:any;
   //phân trang
   
   
@@ -24,15 +25,7 @@ export class HocphanComponent implements OnInit {
  
   hocphans: any = [];
   mahp: any;
-  hocky: any;
-  sotc: any;
  
-  heso: any;
-  tieude: any;
-  code: any;
-  tenhp: any;
-
-  ghichu: any;
   checkSearch:boolean=false;
   pageSize = 5;
   page: any = 1;
@@ -41,7 +34,7 @@ export class HocphanComponent implements OnInit {
   totalRecords:any;
   //
   searchText: any;
-  constructor(private hocphanService: HocphanService,
+  constructor(private quanlythongtinService: QuanlythongtinService,
     private readonly messageService: MessageService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -60,8 +53,23 @@ export class HocphanComponent implements OnInit {
       heso: this.fb.control('',[Validators.required]),
       ghichu: this.fb.control(''),
     });
+    //khởi tạo form edit
+    this.formEdit = this.fb.group(
+      {
+        mahp: this.fb.control('', [Validators.required]),
+        tenhp: this.fb.control('', [Validators.required]),
+        code: this.fb.control('', [Validators.required]),
+        hocky: this.fb.control('', [Validators.required]),
+        sotc: this.fb.control('', [Validators.required]),
+        tieude: this.fb.control('', [Validators.required]),
+        heso: this.fb.control('', [Validators.required]),
+        ghichu: this.fb.control(''),
+      }
+    );
+  
     this.loadData(1);
   }
+  
   loadData(page: any): void {
     // this.spinner.show();
     if (this.checkSearch == true) this.page = 1;
@@ -74,8 +82,8 @@ export class HocphanComponent implements OnInit {
      // sortByCreatedDate: this.sortByCreatedDate,
     }
     setTimeout(() => {
-      this.hocphanService
-        .pagination(data)
+      this.quanlythongtinService
+        .DanhSachHocPhan(data)
          //.pipe(first())
         .subscribe({
           next: (model: any) => {
@@ -92,89 +100,82 @@ export class HocphanComponent implements OnInit {
     this.checkSearch = true;
     this.loadData(1);
   }
-  DsHocPhan() {
-    this.spinner.show();
-    this.hocphanService.getAll().subscribe(data => {
-      this.hocphans = data;
+  // DsHocPhan() {
+  //   this.spinner.show();
+  //   this.quanlythongtinService.getAll().subscribe(data => {
+  //     this.hocphans = data;
      
-      console.log(this.hocphans);
+  //     console.log(this.hocphans);
      
-      this.spinner.hide();
-    });
-  }
+  //     this.spinner.hide();
+  //   });
+  // }
 
   add() {
-    var val = {
-      tenhp: this.formAdd.get('tenhp')?.value,
-      sotc: this.formAdd.get('sotc')?.value,
-      hocky: this.formAdd.get('hocky')?.value,
-      heso: this.formAdd.get('heso')?.value,
-      tieude: this.formAdd.get('tieude')?.value,
-      code: this.formAdd.get('code')?.value,
-      ghichu: this.formAdd.get('ghichu')?.value,
-    };
-    this.hocphanService.add(val).subscribe((data: any) => {
+    //build thành 1 obj
+    // var val = {
+    //   tenhp: this.formAdd.get('tenhp')?.value,
+    //   sotc: this.formAdd.get('sotc')?.value,
+    //   hocky: this.formAdd.get('hocky')?.value,
+    //   heso: this.formAdd.get('heso')?.value,
+    //   tieude: this.formAdd.get('tieude')?.value,
+    //   code: this.formAdd.get('code')?.value,
+    //   ghichu: this.formAdd.get('ghichu')?.value,
+    // };
+    this.quanlythongtinService.ThemHocPhan(this.formAdd.value).subscribe((data: any) => {
       alert(data.toString());
       
        setTimeout(() => {
-        this.router.navigateByUrl('/hocphan');
+        this.loadData(1);
       }, 1000);
-      location.reload();
+     
     })
 
   }
   onEdit(mahp: any): void {
 
-    this.hocphanService
-      .getByid(mahp)
+    this.quanlythongtinService
+      .ChiTietHocPhan(mahp)
 
       .subscribe({
         next: (loai) => {
-          //console.log(supplier);
-          this.mahp = loai.mahp;
-          this.tenhp = loai.tenhp;
-          this.hocky = loai.hocky;
-          this.heso = loai.heso;
-          this.tieude = loai.tieude;
-          this.sotc = loai.sotc;
-          this.code = loai.code;
-          this.ghichu = loai.ghichu;
+          console.log(loai);
+          
+          this.id_Edit=loai.mahp;
+          this.formEdit = this.fb.group(
+            {
+              mahp: this.fb.control(loai.mahp, [Validators.required]),
+              tenhp: this.fb.control(loai.tenhp, [Validators.required]),
+              code: this.fb.control(loai.code, [Validators.required]),
+              hocky: this.fb.control(loai.hocky, [Validators.required]),
+              sotc: this.fb.control(loai.sotc, [Validators.required]),
+              tieude: this.fb.control(loai.tieude, [Validators.required]),
+              heso: this.fb.control(loai.heso, [Validators.required]),
+              ghichu: this.fb.control(loai.ghichu)
+            });
         },
       });
   }
 
-  update(){
-    var val = {
-      mahp:this.mahp,
-      tenhp: this.tenhp,
-      sotc: this.sotc,
-      hocky: this.hocky,
-      // sotclythuyet: this.sotclythuyet,
-      // sotcthuchanh: this.sotcthuchanh,
-      heso: this.heso,
-      tieude: this.tieude,
-      code: this.code,
-      ghichu: this.ghichu,
-    };
-    this.hocphanService.update(val).subscribe((data: any) => {
+  update() {
+    this.quanlythongtinService.UpdateHocPhan(this.id_Edit, this.formEdit.value).subscribe((data: any) => {
       alert(data.toString());
-      location.reload();
-       setTimeout(() => {
-        this.router.navigateByUrl('/hocphan');
+      setTimeout(() => {
+        this.loadData(1);
       }, 1000);
     })
   }
   closeClick() {
     setTimeout(() => {
-      this.router.navigateByUrl('/hocphan');
+      this.loadData(1);
     }, 1000);
     this.clearFormAdd();
   }
   deleteClick(item: any) {
     if (confirm('Bạn có muốn xóa không ??')) {
-      this.hocphanService.delete(item.mahp).subscribe(data => {
+      this.quanlythongtinService.DeleteHocPhan(item.mahp).subscribe(data => {
         alert(data.toString());
-        this.DsHocPhan();
+        this.loadData(1);
       });
     }
   }
@@ -182,6 +183,6 @@ export class HocphanComponent implements OnInit {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
   }
   clearFormAdd(){
-    this.formAdd.reset;
+    this.formAdd.reset();
   }
 }

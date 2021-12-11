@@ -6,73 +6,66 @@
 
                 <section class="content">
                     <div class="container-fluid">
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#exampleModal"  data-backdrop="static" data-keyboard="false">
-                        Add
-                    </button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" (click)="ClearFormAdd()"
+                            data-target="#exampleModal" data-backdrop="static" data-keyboard="false">
+                            Tạo lớp
+                        </button>
+
 
                         <!-- Info boxes -->
                         <div class="row">
                             <div class="col-12 col-sm-6" *ngFor="let item of lopdays">
                                 <div class="info-box">
-                                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
                                     <div class="info-box-content">
-                                       <a routerLink="/giaovien/lophoc/giangday/{{item.magiangday}}">    <span class="info-box-text">{{item.tenhp}}</span></a>
+                                        <a style="text-decoration: none;font-size: 17px;font-weight: bold;"
+                                            routerLink="/giaovien/XemChiTietLopGiangDay/{{item.magiangday}}"><span
+                                                class="info-box-text">{{item.tenhp}}</span></a>
                                         <span class="info-box-number">
-                                            {{item.malop}}
+                                            Lớp : {{item.malop}}
                                         </span>
-                                       
+                                        <span class="info-box-number" *ngIf="item.ghichu=='TH'">
+                                            Tiết : Thực hành
+                                        </span>
+                                        <span class="info-box-number" *ngIf="item.ghichu=='LT'">
+                                            Tiết : Lý thuyết
+                                        </span>
+                                        <span class="info-box-number" *ngIf="item.ghichu=='K'">
+                                            Tiết : Khác
+                                        </span>
                                     </div>
-                                    <button (click)="deleteClick(item)" class="btn-primary" style="width: 30px;height: 30px;border-radius: 5px;"><i class="fa fa-trash"></i></button>
+                                    <button (click)="DeleteLopGiangDayTrucTuyen(item)" class="btn-primary"
+                                        style="height: 30px;border-radius: 3px;"> Hủy </button>
+
                                     <!-- /.info-box-content -->
                                 </div>
                                 <!-- /.info-box -->
                             </div>
-                         
-                      
-                            
-                            <!-- /.col -->
-
-                            <!-- fix for small devices only -->
                             <div class="clearfix hidden-md-up"></div>
-
-
-
                             <!-- /.col -->
                         </div>
-                        <!-- /.row -->
-
-                   
-                        <!-- /.row -->
-
-                        <!-- Main row -->
-                    
-                        <!-- /.row -->
                     </div>
-                    <!--/. container-fluid -->
                 </section>
             </div>
-
         </div>
-        <!-- /.tab-content -->
     </div><!-- /.card-body -->
 </div>
 <!-- /.card -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="width:600px">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Thêm lớp giảng dạy </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
                     <span aria-hidden="true">&times;</span>
                 </button>
+
             </div>
-            <div class="modal-body">
-               
-                <form action=""  [formGroup]="formAdd">
+            <div class="modal-body" >
+
+                <form action="" [formGroup]="formAdd" >
                     <div class="form-row">
                         <div class="col">
                             <label for="exampleInputEmail1">Mã lớp :</label>
@@ -81,8 +74,9 @@
                                     <option [ngValue]="lophocs.malop">{{lophocs.tenlop}} </option>
                                 </ng-container>
                             </select>
-                            <span class="text-danger" role="alert" *ngIf="formAdd.controls.malop?.errors?.required && formAdd.controls.malop?.touched">
-                                Mã malop không được để trống!
+                            <span class="text-danger" role="alert"
+                                *ngIf="formAdd.controls.malop?.errors?.required && formAdd.controls.malop?.touched">
+                                Mã lớp không được để trống!
                             </span>
                         </div>
                         <div class="col">
@@ -94,42 +88,65 @@
                             </select>
                             <span class="text-danger" role="alert"
                                 *ngIf="formAdd.controls.mahp?.errors?.required && formAdd.controls.mahp?.touched">
-                                Tên mahp đầy đủ không được để trống!
+                                Tên học phần không được để trống!
                             </span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label for="exampleInputEmail1"> Buổi học :</label>
-                            <input type="text" class="form-control"  formControlName="ghichu" placeholder="Nhập tiết học ( Lý thuyết hoặc thực hành )">
-                            <span class="text-danger" role="alert" *ngIf="formAdd.controls.ghichu?.errors?.required && formAdd.controls.ghichu?.touched">
+                            <select class="form-control" formControlName="ghichu">
+                                <option value="LT"> Lý thuyết</option>
+                                <option value="TH"> Thực hành</option>
+                                <option value="K"> Khác</option>
+                            </select>
+                            <span class="text-danger" role="alert"
+                                *ngIf="formAdd.controls.ghichu?.errors?.required && formAdd.controls.ghichu?.touched">
                                 buổi học không được để trống!
                             </span>
                         </div>
                         <div class="col">
                             <label for="exampleInputEmail1"> Tiết học :</label>
-                            <input type="text" class="form-control"  formControlName="tiethoc" placeholder="Nhập tiết học ( ví dụ:1,2,3,4,5...)">
-                            <span class="text-danger" role="alert" *ngIf="formAdd.controls.tiethoc?.errors?.required && formAdd.controls.tiethoc?.touched">
+                            <input type="text" class="form-control" formControlName="tiethoc"
+                                placeholder="Nhập tiết học ( ví dụ:1,2,3,4,5...)">
+                            <span class="text-danger" role="alert"
+                                *ngIf="formAdd.controls.tiethoc?.errors?.required && formAdd.controls.tiethoc?.touched">
                                 Tiết học không được để trống!
                             </span>
                         </div>
                     </div>
-                
-                   
+
+
                     <div class="form-group">
                         <div class="form-group">
                             <label>năm học:</label>
-                            <input type="text" class="form-control" formControlName="namhoc" placeholder="Nhập năm học (ví dụ : 2019-2020...)">
-                          </div>
+                            <input type="text" class="form-control" formControlName="namhoc"
+                                placeholder="Nhập năm học (ví dụ : 2019-2020...)">
+                        </div>
                     </div>
-                   
+
                 </form>
-               
+
             </div>
             <div class="modal-footer">
-                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button" class="btn btn-default">Close</button>
-                <button type="button" (click)="addLophoc()" [disabled]="!formAdd.valid"   class="btn btn-primary">Thêm mới</button>
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="ThemlopGiangDay()" [disabled]="!formAdd.valid"
+                    class="btn btn-primary">Thêm mới</button>
+                   
             </div>
         </div>
     </div>
 </div>
+
+
+
+<p-toast></p-toast>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#ffbe76" type="pacman">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<p-confirmDialog [style]="{width: '30vw'}" rejectButtonStyleClass="p-button-text">
+
+</p-confirmDialog>

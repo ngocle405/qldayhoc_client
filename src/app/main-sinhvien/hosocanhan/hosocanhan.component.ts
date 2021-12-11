@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { SinhvienService } from 'src/app/services/sinhvien.service';
+
+import { TrangsinhvienService } from 'src/app/services/trangsinhvien.service';
 
 @Component({
   selector: 'app-hosocanhan',
@@ -10,7 +11,8 @@ import { SinhvienService } from 'src/app/services/sinhvien.service';
 })
 export class HosocanhanComponent implements OnInit {
 
-  constructor(private sinhvienService: SinhvienService, private router: Router) { }
+  constructor(private route: ActivatedRoute,private trangsinhvienService: TrangsinhvienService, private router: Router) { }
+  id_edit:any;
   sv: any;
   masv: any;
   tensv: any;
@@ -35,12 +37,23 @@ export class HosocanhanComponent implements OnInit {
   matkhau: any;
   ngOnInit(): void {
     this.sv = JSON.parse(localStorage.getItem('sinhvien') || '{}');
-    this.tensv = this.sv.tensv;
+    this.masv = this.route.snapshot.paramMap.get('masv');
+   
+    this.id_edit=this.sv.masv;
+    this.ChitietSinhvien(this.masv)
+   
+  }
+  ctsinhvien:any;
+  ChitietSinhvien(masv: any){
+    this.trangsinhvienService.ChiTietSinhVien(masv).subscribe(res=>{
+      this.ctsinhvien=res;
+    })
+      
   }
   onEdit(masv: any): void {
 
-    this.sinhvienService
-      .getByid(masv)
+    this.trangsinhvienService
+      .ChiTietSinhVien(masv)
 
       .subscribe({
         next: (loai) => {
@@ -72,7 +85,7 @@ export class HosocanhanComponent implements OnInit {
       });
   }
 
-  update() {
+  UpdateHoSoCaNhan() {
     var val = {
       masv: this.sv.masv,
       tensv: this.tensv,
@@ -95,12 +108,17 @@ export class HosocanhanComponent implements OnInit {
       matkhau:this.matkhau,
       malop:this.malop
     }
-    this.sinhvienService.updateHoso(val).subscribe(res => {
+    this.trangsinhvienService.UpdateHoSoCaNhan(this.id_edit,val).subscribe(res => {
       // localStorage.setItem('user', JSON.stringify(this.user));
-      alert("Đã sửa thông tin cá nhân,yêu cầu bạn đăng nhập lại");
-      console.log(res);
-      location.reload();
-      //this.logout();
+      alert("Đã sửa thông tin cá nhân");
+     
+      this.ChitietSinhvien(this.masv);
+     
+      // setTimeout(() => {
+      //   this.logout();
+      // }, 5000);
+      
+      
     });
   }
   public uploadPhoto(event: any) {
@@ -109,15 +127,16 @@ export class HosocanhanComponent implements OnInit {
     const formData: FormData = new FormData();
     formData.append('uploadedFile', file);
     console.log(formData)
-    this.sinhvienService.UploadPhoto(formData).subscribe((data: any) => {
+    this.trangsinhvienService.UploadPhotos(formData).subscribe((data: any) => {
       this.anhdaidien = data.toString();
-      this.PhotoFilePath = this.sinhvienService.PhotoUrl + this.anhdaidien;
+      this.PhotoFilePath = this.trangsinhvienService.PhotoUrl+"/sinhvien" + this.anhdaidien;
     })
   }
   logout() {
-    this.sinhvienService.logout();
+    this.trangsinhvienService.logout();
     setTimeout(() => {
       this.router.navigateByUrl('/sinhvien/login');
     }, 1000);
   }
+
 }

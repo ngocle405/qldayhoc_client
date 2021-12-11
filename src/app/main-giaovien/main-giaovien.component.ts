@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GiaovienService } from '../services/giaovien.service';
+
 
 @Component({
   selector: 'app-main-giaovien',
@@ -9,7 +9,7 @@ import { GiaovienService } from '../services/giaovien.service';
 })
 export class MainGiaovienComponent implements OnInit {
 
-  constructor(private router: Router, private giaovienService: GiaovienService) { }
+  constructor(private router: Router,) { }
   teacher: any=[];
   hovaten:any;
   avatar:any;

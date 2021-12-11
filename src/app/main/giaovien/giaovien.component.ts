@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
-import { GiaovienService } from 'src/app/services/giaovien.service';
+
+import { QuanlythongtinService } from 'src/app/services/quanlythongtin.service';
 
 @Component({
   selector: 'app-giaovien',
@@ -13,7 +14,7 @@ import { GiaovienService } from 'src/app/services/giaovien.service';
 })
 export class GiaovienComponent implements OnInit {
 
-  constructor(private giaovienService: GiaovienService,
+  constructor(private quanlythongtinService: QuanlythongtinService,
     private router: Router,
     private readonly messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -71,8 +72,8 @@ export class GiaovienComponent implements OnInit {
        sortByCreatedDate: this.sortByCreatedDate,
     }
     setTimeout(() => {
-      this.giaovienService
-        .pagination(data)
+      this.quanlythongtinService
+        .DanhSachGiaoVien(data)
         //.pipe(first())
         .subscribe({
           next: (model: any) => {
@@ -85,21 +86,12 @@ export class GiaovienComponent implements OnInit {
         });
     }, 300);
   }
-  DsGiaoVien() {
-    //this.spinner.show();
-    this.giaovienService.getAll().subscribe(data => {
-      this.giaoviens = data;
-      //   this.totalLength = data.length;
-      console.log(this.giaoviens);
 
-      this.spinner.hide();
-    });
-  }
   onSearch(): void {
     this.checkSearch = true;
     this.loadData(1);
   }
-  add() {
+  ThemGiaoVien() {
     var val = {
       magv: this.formAdd.get('magv')?.value,
       tengv: this.formAdd.get('tengv')?.value,
@@ -111,12 +103,12 @@ export class GiaovienComponent implements OnInit {
       chuyennganh: this.formAdd.get('chuyennganh')?.value,
       quoctich: this.formAdd.get('quoctich')?.value,
     };
-    this.giaovienService.add(val).subscribe((data: any) => {
+    this.quanlythongtinService.ThemGiaoVien(val).subscribe((data: any) => {
       alert(data.toString());
       setTimeout(() => {
-        this.router.navigateByUrl('/giaovien');
+        this.loadData(1);
+        // this.router.navigateByUrl('/giaovien');
       }, 1000);
-      location.reload();
     })
 
   }
@@ -127,13 +119,13 @@ export class GiaovienComponent implements OnInit {
     }, 1000);
     //this.clear();
   }
-  deleteClick(item: any) {
+  DeleteGiaoVien(item: any) {
     this.confirmationService.confirm({
       message: 'Bạn có muốn xóa giáo viên này ?',
       accept: () => {
-        this.giaovienService.delete(item.magv).subscribe(data => {
+        this.quanlythongtinService.DeleteGiaoVien(item.magv).subscribe(data => {
           this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã xóa thành công.' });
-          this.DsGiaoVien();
+          this.loadData(1);
         });
 
       },

@@ -1,8 +1,8 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a routerLink="/sinhvien/hosocanhan" class="navbar-brand">
-        <img src="http://localhost:44169/Photos/sinhvien/{{avatar}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">{{hovaten}}</span>
+      <a routerLink="/sinhvien/hosocanhan{{masv}}" class="navbar-brand">
+        <img src="http://localhost:44169/Photos/sinhvien/{{sinhvien.anhdaidien}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">{{sinhvien.tensv}}</span>
       </a>
 
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,14 +39,14 @@
         <!-- Notifications Dropdown Menu -->
        
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+            <a class="nav-link" data-toggle="dropdown">
               <i class="far fa-user"></i>
               <span class="badge badge-warning navbar-badge"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <span class="dropdown-item dropdown-header"></span>
               <div class="dropdown-divider"></div>
-              <a routerLink="/sinhvien/hosocanhan" class="dropdown-item">
+              <a routerLink="/sinhvien/hosocanhan/{{sinhvien.masv}}" class="dropdown-item">
                 <i class="fas fa-envelope mr-2"></i> Hồ sơ cá nhân
                
               </a>
@@ -61,7 +61,7 @@
             </div>
           </li>
         <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true"  role="button">
             <i class="fas fa-th-large"></i>
           </a>
         </li>

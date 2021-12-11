@@ -88,7 +88,11 @@
                                             <td>{{item.tenlop}}</td>
                                             <td>{{item.siso}}</td>
                                             <td>{{item.gvcn}}</td>
-                                            <td>{{item.khoa}}</td>
+                                         
+                                            <td *ngIf="item.khoa=='cntt'">Khoa Công nghệ thông tin</td>
+                                            <td *ngIf="item.khoa=='cnm'">Khoa Công nghệ may - thời trang</td>
+                                            <td *ngIf="item.khoa=='nna'">Khoa Ngôn ngữ anh</td>
+                                            <td *ngIf="item.khoa=='ktdn'">Khoa Kế toán - doanh nghiệp</td>
                                             <!-- <td>
                                                 <span *ngIf="item.status;else unactive"
                                                     class="badge badge-success">Active</span>
@@ -132,99 +136,142 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
             <form action="" [formGroup]="formEdit" (ngSubmit)="update()">
+                
                 <div class="modal-body">
-                    <label for="exampleInputEmail1">Mã lớp :</label>
-                    <input type="number" class="form-control" formControlName="malop" placeholder="mã lớp">
-                    <label for="exampleInputEmail1">Tên lớp:</label>
-                    <input type="text" class="form-control" formControlName="tenlop" placeholder="tên lớp">
-
-                    <label for="exampleInputEmail1">sĩ số :</label>
-                    <input type="number" class="form-control" formControlName="siso" placeholder="sĩ số">
-
-                    <label for="exampleInputEmail1">Gvcn :</label>
-                    <input type="text" class="form-control" formControlName="gvcn" placeholder="gvcn">
-
-                    <label for="exampleInputEmail1">Khoa :</label>
-                    <input type="text" class="form-control" formControlName="khoa" placeholder="khoa">
+                    <div class="form-row form-group">
+                        <div class="col">
+                            <label for="exampleInputEmail1">Mã lớp</label>
+                            <input type="number" maxlength="6" formControlName="malop"
+                                class="form-control form-control-sm" placeholder="Nhập mã lớp">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1">Tên lớp</label>
+                            <input type="text" formControlName="tenlop"
+                                class="form-control form-control-sm" id="exampleInputPassword1"
+                                placeholder="nhập tên lớp">
+                        </div>
+                        
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            <label for="exampleInputPassword1">Sĩ số</label>
+                            <input type="text" formControlName="siso"
+                                class="form-control form-control-sm" id="exampleInputPassword1"
+                                placeholder="nhập sĩ số lớp">
+                           
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1">Gvcn</label>
+                            <input type="text" formControlName="gvcn"
+                                class="form-control form-control-sm" id="exampleInputPassword1"
+                                placeholder="nhập gvcn">
+                           
+                        </div>
+                        
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            <label for="exampleInputPassword1">Khoa</label>
+                            <select formControlName="khoa" class="form-control form-control-sm">
+                                <option value="cntt">Công nghệ thông tin</option>
+                                <option value="cnm">Công nghệ may -  thời trang</option>
+                                <option value="nna">Ngôn ngữ anh</option>
+                                <option value="ktdn">Kế toán - doanh nhiệp</option>
+                            </select>
+                            <small class="form-text text-danger"
+                                *ngIf="formAdd.controls.khoa?.errors?.required && formAdd.controls.khoa?.touched">
+                                Khoa không được để trống!
+                            </small>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                         class="btn btn-default">Close</button>
-                    <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+                    <button type="button" (click)="update()" class="btn btn-primary">Update </button>
                 </div>
             </form>
+           
         </div>
     </div>
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" style="width:70%" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-xl" style="width:50%" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm lớpc</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Thêm lớp</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             
             <form action="" [formGroup]="formAdd">
+                
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Mã lớp</label>
-                        <input type="number" maxlength="6" formControlName="malop"
-                            class="form-control form-control-sm" placeholder="Nhập mã lớp">
-
+                    <div class="form-row form-group">
+                        <div class="col">
+                            <label for="exampleInputEmail1">Mã lớp</label>
+                            <input type="number" maxlength="6" formControlName="malop"
+                                class="form-control form-control-sm" placeholder="Nhập mã lớp">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1">Tên lớp</label>
+                            <input type="text" formControlName="tenlop"
+                                class="form-control form-control-sm" id="exampleInputPassword1"
+                                placeholder="nhập tên lớp">
+                            <small class="form-text text-danger"
+                                *ngIf="formAdd.controls.tenlop?.errors?.required && formAdd.controls.tenlop?.touched">
+                                Tên lớp không được để trống!
+                            </small>
+                        </div>
+                        
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Tên lớp</label>
-                        <input type="text" formControlName="tenlop"
-                            class="form-control form-control-sm" id="exampleInputPassword1"
-                            placeholder="nhập tên lớp">
-                        <small class="form-text text-danger"
-                            *ngIf="formAdd.controls.tenlop?.errors?.required && formAdd.controls.tenlop?.touched">
-                            Tên lớp không được để trống!
-                        </small>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            <label for="exampleInputPassword1">Sĩ số</label>
+                            <input type="text" formControlName="siso"
+                                class="form-control form-control-sm" id="exampleInputPassword1"
+                                placeholder="nhập sĩ số lớp">
+                            <small class="form-text text-danger"
+                                *ngIf="formAdd.controls.siso?.errors?.required && formAdd.controls.siso?.touched">
+                                Sĩ số lớp không được để trống!
+                            </small>
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1">Gvcn</label>
+                            <input type="text" formControlName="gvcn"
+                                class="form-control form-control-sm" id="exampleInputPassword1"
+                                placeholder="nhập gvcn">
+                            <small class="form-text text-danger"
+                                *ngIf="formAdd.controls.gvcn?.errors?.required && formAdd.controls.gvcn?.touched">
+                                Gvcn không được để trống!
+                            </small>
+                        </div>
+                        
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Sĩ số</label>
-                        <input type="text" formControlName="siso"
-                            class="form-control form-control-sm" id="exampleInputPassword1"
-                            placeholder="nhập sĩ số lớp">
-                        <small class="form-text text-danger"
-                            *ngIf="formAdd.controls.siso?.errors?.required && formAdd.controls.siso?.touched">
-                            Sĩ số lớp không được để trống!
-                        </small>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            <label for="exampleInputPassword1">Khoa</label>
+                            <select formControlName="khoa" class="form-control form-control-sm">
+                                <option value="cntt">Công nghệ thông tin</option>
+                                <option value="cnm">Công nghệ may -  thời trang</option>
+                                <option value="nna">Ngôn ngữ anh</option>
+                                <option value="ktdn">Kế toán - doanh nhiệp</option>
+                            </select>
+                            <small class="form-text text-danger"
+                                *ngIf="formAdd.controls.khoa?.errors?.required && formAdd.controls.khoa?.touched">
+                                Khoa không được để trống!
+                            </small>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Gvcn</label>
-                        <input type="text" formControlName="gvcn"
-                            class="form-control form-control-sm" id="exampleInputPassword1"
-                            placeholder="nhập gvcn">
-                        <small class="form-text text-danger"
-                            *ngIf="formAdd.controls.gvcn?.errors?.required && formAdd.controls.gvcn?.touched">
-                            Gvcn không được để trống!
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Khoa</label>
-                        <input type="text" formControlName="khoa"
-                            class="form-control form-control-sm" id="exampleInputPassword1"
-                            placeholder="nhập khoa">
-                        <small class="form-text text-danger"
-                            *ngIf="formAdd.controls.khoa?.errors?.required && formAdd.controls.khoa?.touched">
-                            Khoa không được để trống!
-                        </small>
-                    </div>
-
-                   
                 </div>
                 <div class="modal-footer">
                     <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                         class="btn btn-default">Close</button>
-                    <button type="button" (click)="add()" [disabled]="!formAdd.valid" class="btn btn-primary">Thêm mới </button>
+                    <button type="button" (click)="add()"  class="btn btn-primary">Thêm mới </button>
                 </div>
             </form>
         </div>

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AdminCPService } from 'src/app/services/admin-cp.service';
 
 @Component({
   selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
-  styleUrls: ['./login-admin.component.css']
+  styleUrls: ['./login-admin.component.css'],
+  providers: [MessageService]
 })
 export class LoginAdminComponent implements OnInit {
 
@@ -14,6 +16,7 @@ export class LoginAdminComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private adminCPService: AdminCPService,
+    private readonly messageService: MessageService,
     private router: Router
   ) { }
 
@@ -38,15 +41,18 @@ export class LoginAdminComponent implements OnInit {
       .subscribe(
         (admin) => {
           if (admin == null) {
-            alert("tk mk k ton tai")
-            this.clearFormLogin();
+            this.messageService.add({ severity: 'info', summary: 'Thông báo', detail: 'Tài khoản hoặc mật khẩu chưa đúng.' });
+           
+            setTimeout(() => {
+              this.clearFormLogin();
+            }, 2000);
             
           } else if(admin!="") {
             
-            alert("welcome to admin");
+            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã đăng nhập thành công.' });
             setTimeout(() => {
-              this.router.navigateByUrl('/home');
-            }, 1000);
+              this.router.navigateByUrl('/admin/home');
+            }, 2000);
           }
           console.log(admin);
         },

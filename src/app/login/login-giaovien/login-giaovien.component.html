@@ -3,10 +3,10 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>Admin</b>LTE</a>
+                
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Đăng nhập để truy cập vào hệ thống</p>
 
                 <form [formGroup]="formLogin" (ngSubmit)="onLogin()">
                     <div class="input-group mb-3">
@@ -46,14 +46,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
+                      
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" [disabled]="!formLogin.valid"  class="btn btn-primary btn-block">Sign In</button>
@@ -64,15 +57,15 @@
 
                 <!-- /.social-auth-links -->
 
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
+                <p style="float: right;text-decoration: none;" class="mb-1">
+                    <a routerLink="/">Quay về trang chủ</a>
                 </p>
-                <p class="mb-0">
-                    <a href="register.html" class="text-center">Register a new membership</a>
-                </p>
+               
             </div>
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
     </div>
 </div>
+
+<p-toast></p-toast>

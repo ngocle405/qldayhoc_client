@@ -14,7 +14,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AuthGuard } from '../article/auth.guard';
 
 import { LayoutModule } from '../Layout/Layout.module';
-import { TaikhoanComponent } from './taikhoan/taikhoan.component';
+
 import { AdminCPComponent } from './admin-cp/admin-cp.component';
 import { HocphanComponent } from './hocphan/hocphan.component';
 //
@@ -51,34 +51,31 @@ export const mainRoutes: Routes = [
       },
       //
       {
-        path: 'admin/giaovien', component: GiaovienComponent, canActivate: [AuthGuard]
+        path: 'giaovien', component: GiaovienComponent, canActivate: [AuthGuard]
 
       },
       //
       {
-        path: 'admin/xemhoso/:magv', component: XemhosoComponent, canActivate: [AuthGuard]
+        path: 'xemhoso/:magv', component: XemhosoComponent, canActivate: [AuthGuard]
 
       },
       //
+   
+      //
       {
-        path: 'admin/taikhoan', component: TaikhoanComponent, canActivate: [AuthGuard]
-
+        path: 'hocphan', component: HocphanComponent, canActivate: [AuthGuard]
       },
       //
       {
-        path: 'admin/hocphan', component: HocphanComponent, canActivate: [AuthGuard]
+        path: 'lophoc', component: LophocComponent, canActivate: [AuthGuard]
       },
       //
       {
-        path: 'admin/lophoc', component: LophocComponent, canActivate: [AuthGuard]
-      },
-      //
-      {
-        path: 'admin/sinhvien', component: SinhvienComponent, canActivate: [AuthGuard]
+        path: 'sinhvien', component: SinhvienComponent, canActivate: [AuthGuard]
       },
        //
        {
-        path: 'admin/tailieu', component: TailieuComponent, canActivate: [AuthGuard]
+        path: 'tailieu', component: TailieuComponent, canActivate: [AuthGuard]
       },
     ],
     //
@@ -89,7 +86,7 @@ export const mainRoutes: Routes = [
 @NgModule({
   declarations: [
     MainComponent,
-    TaikhoanComponent, AdminCPComponent, HocphanComponent, LayoutAdminComponent, GiaovienComponent, 
+    AdminCPComponent, HocphanComponent, LayoutAdminComponent, GiaovienComponent, 
     XemhosoComponent, LophocComponent, SinhvienComponent, TailieuComponent,
   ],
   imports: [

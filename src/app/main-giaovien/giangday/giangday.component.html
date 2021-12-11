@@ -18,6 +18,7 @@
                       <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Tài liệu học </a></li>
                       <li class="nav-item"><a class="nav-link" href="#baitap" data-toggle="tab">Bài tập </a></li>
                       <li class="nav-item"><a class="nav-link" href="#thaoluans" data-toggle="tab">Thảo luận </a></li>
+                      <li class="nav-item"><a class="nav-link" routerLink="/giaovien/DanhSachLopGiangDayTrucTuyen" data-toggle="tab">Quay lại </a></li>
                     </ul>
                   </div><!-- /.card-header -->
                   <div class="card-body">
@@ -44,19 +45,18 @@
                                   <th scope="col">Tiêu đề</th>
         
                                   <th scope="col">ma lop</th>
-                                  <th scope="col">ten hp</th>
         
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr *ngFor="let i = index;let item of sv">
+                                <tr *ngFor="let i = index;let item of sinhvien_duocthemvaolop">
                                   <td>{{ i + 1 }}</td>
         
                                   <td >{{item.tensv}}</td>
         
                                   <td>{{item.malop}}</td>
-                                  <td>{{item.tenhp }}</td>
+                                  
                                  
         
         
@@ -64,6 +64,7 @@
                               </tbody>
                             </table>
                           </div>
+                     
                         </div>
                       </div>
                       <!-- /.tab-pane -->
@@ -219,7 +220,7 @@
                                     class="btn btn-primary"><i class="fa fa-download"></i></a> |
                                   <button (click)="deleteBaitap(item)" class="btn btn-primary" >
                                     <i class="fas fa-trash"></i></button> |
-                                    <a routerLink="/giaovien/baitapdanop/{{item.mabt}}" class="btn btn-primary"><i class="fa fa-file"></i></a>
+                                    <a routerLink="/giaovien/ChiTietBaiTap/{{item.mabt}}" class="btn btn-primary"><i class="fa fa-file"></i></a>
                                 </td>
         
                               </tr>
@@ -277,6 +278,7 @@
                           </table>
                         </div>
                       </div>
+                      <p style="float: right;color: #007bff;">Học phần : {{xemlops.tenhp}}</p>
                     </div>
                     <!-- /.tab-content -->
                   </div><!-- /.card-body -->
@@ -377,7 +379,7 @@
           <div class="form-group">
             <div class="form-group">
               <label> filename:</label>
-              <input type="file" class="form-control" (change)="uploadFile($event)" id="inputSkills">
+              <input type="file" class="form-control" (change)="UploadTaiLieu($event)" id="inputSkills">
             </div>
           </div>
           <label style="float: left;color: #007bff;" for="">Người tạo : {{teacher.tengv}}</label>
@@ -490,22 +492,65 @@
       </div>
       <div class="modal-body">
         <div>
+          <div class="row mb-1">
+            <div class="col-sm-6">
+          
+          
+            </div>
+            <div class="col-sm-6" style="display: flex;">
+              <input class="form-control" autocomplete="off" type="search" [(ngModel)]="txtSearchName"
+                placeholder="Tìm kiếm tại đây...">
+              <button type="button" (click)="onSearch()" class="btn btn-success">
+                <i class="fas fa-search fa-fw"></i></button>
+          
+            </div>
+          </div>
+          <div class="row mb-1 mt-3">
+            <div class="col-sm-6">
+                <label class="mr-1">Hiển thị </label>
+                <select class="form-control form-control-sm mr-1" [(ngModel)]="pageSize"
+                    (ngModelChange)="Sinhvienchuacotronglop(1)" style="width: 100px;display: inline!important;">
+
+                    <option [value]="5">5</option>
+                    <option [value]="7">7</option>
+                    <option [value]="10">10</option>
+                    <option [value]="20">20</option>
+                    <option [value]="25">25</option>
+                    <option [value]="30">30</option>
+                </select>
+                <label> dòng</label>
+            </div>
+            <div class="col-sm-6">
+                <label class="mr-1">Sắp xếp theo tên </label>
+                <select class="form-control form-control-sm mr-1" [(ngModel)]="sortByName"
+                    (ngModelChange)="Sinhvienchuacotronglop(1)" style="width: 100px;display: inline!important;">
+                    
+                    <option [value]="'asc'">Tăng dần</option>
+                    <option [value]="'desc'">Giảm dần</option>
+                    <option [value]="'reset'">Reset</option>
+                </select>
+            </div>
+      
+          
+         
+
+        </div>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
 
-                  <th scope="col">Tiêu đề</th>
+                  <th scope="col">Họ tên</th>
 
-                  <th scope="col">ma lop</th>
+                  <th scope="col">mã lop</th>
                
 
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let i = index;let item of loadsvlop">
+                <tr *ngFor="let i = index;let item of sinhvien_chuacotronglop">
                   <td>{{ i + 1 }}</td>
                   <td>{{item.tensv}}</td>
                   <td>{{item.malop}}</td>
@@ -521,6 +566,9 @@
               </tbody>
             </table>
           </div>
+          <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [boundaryLinks]="true"
+          [maxSize]="10" [rotate]="true" (pageChange)="Sinhvienchuacotronglop($event)">
+      </ngb-pagination>
         </div>
         
       </div>
@@ -535,11 +583,11 @@
     <div class="modal-content">
       <div class="modal-body">
         Thêm sinh viên này vào lớp ?
-        <form [formGroup]="formEdit" >
+        <form [formGroup]="formLayIdSinhVien" >
           <input type="hidden" formControlName="masv" > 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="addsv()">Thêm vào</button>
+            <button type="button" class="btn btn-primary" (click)="ThemSinhVienVaoLop()">Thêm vào</button>
           </div>
         </form>
       </div>
@@ -549,9 +597,10 @@
 </div>
 <p-toast></p-toast>
 
-<p-confirmDialog [style]="{width: '50vw'}" rejectButtonStyleClass="p-button-text">
+<p-confirmDialog [style]="{width: '30vw'}" rejectButtonStyleClass="p-button-text">
 
 </p-confirmDialog>
+
 <!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="line-spin-fade-rotating" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
 </ngx-spinner> -->

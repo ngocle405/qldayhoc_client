@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GiangdayService } from 'src/app/services/giangday.service';
-import { SinhvienService } from 'src/app/services/sinhvien.service';
+
+
+import { TrangsinhvienService } from 'src/app/services/trangsinhvien.service';
 
 @Component({
   selector: 'app-chitietlophoc',
@@ -12,7 +13,7 @@ export class ChitietlophocComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-   private sinhvienService:SinhvienService, private giangdayService :GiangdayService,) { }
+   private trangsinhvienService:TrangsinhvienService) { }
   sv:any;
   mahoctap:any;
   magiangday:any;
@@ -31,37 +32,31 @@ export class ChitietlophocComponent implements OnInit {
     this.thaoluansinhvien(this.mahoctap);
     //this.danhsachsinhvien(this.magiangday);
   }
-  danhsachsinhvien(id:any){
-    this.giangdayService.dssv(id).subscribe((data: any) => {
-      this.danhsachsinhviens = data;//lay du lieu 
-      //console.log(data);
-    });
-  }
+  // danhsachsinhvien(id:any){
+  //   this.giangdayService.dssv(id).subscribe((data: any) => {
+  //     this.danhsachsinhviens = data;//lay du lieu 
+  //     //console.log(data);
+  //   });
+  // }
   baigiangsinhvien(id: any) {
-    this.sinhvienService.getbaigiangsinhvien(id).subscribe(res => {
+    this.trangsinhvienService.getbaigiangsinhvien(id).subscribe(res => {
       this.baigiangsinhviens = res;
-      console.log(res);
+     
     })
   }
   tailieusinhvien(id: any) {
-    this.sinhvienService.gettailieusinhvien(id).subscribe(res => {
+    this.trangsinhvienService.gettailieusinhvien(id).subscribe(res => {
       this.tailieusinhviens = res;
-      console.log(res);
-     
     })
   }
   baitapsinhvien(id: any) {
-    this.sinhvienService.getbaitapsinhvien(id).subscribe(res => {
+    this.trangsinhvienService.getbaitapsinhvien(id).subscribe(res => {
       this.baitapsinhviens = res;
-      console.log(res);
-     
     })
   }
   thaoluansinhvien(id: any) {
-    this.sinhvienService.getthaoluansinhvien(id).subscribe(res => {
+    this.trangsinhvienService.getthaoluansinhvien(id).subscribe(res => {
       this.thaoluansinhviens = res;
-      console.log(res);
-     
     })
   }
 

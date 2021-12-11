@@ -120,6 +120,7 @@
     </div>
     <!-- container-fluid -->
 </div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -227,38 +228,65 @@
             </div>
             <div class="modal-body">
 
-                <label for="exampleInputEmail1">Code :</label>
-                <input type="text" class="form-control" [(ngModel)]="code" placeholder="code">
-                <label for="exampleInputEmail1">Tên học phần :</label>
-                <input type="text" class="form-control" [(ngModel)]="tenhp" placeholder="tên học phần">
-
-                <label for="exampleInputEmail1">số tín chỉ :</label>
-                <input type="number" class="form-control" [(ngModel)]="sotc" placeholder="số tín chỉ">
-
-                <label for="exampleInputEmail1">Hệ số :</label>
-                <input type="number" class="form-control" [(ngModel)]="heso" placeholder="hệ số">
-
-                <label for="exampleInputEmail1">Tiêu đề :</label>
-                <input type="text" class="form-control" [(ngModel)]="tieude" placeholder="Tiêu đề">
-
-                <label for="exampleInputEmail1">ghi chú:</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="ghichu"
-                    rows="3">{{ghichu}}</textarea>
-                <div class="form-group">
-                    <label>Học kì:</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" [(ngModel)]="hocky" [value]="1">
-                        <label class="form-check-label">
-                            Học kì 1
-                        </label>
+                <form action="" [formGroup]="formEdit">
+                    <div class="form-row">
+                       
+                        <div class="col">
+                            <label for="exampleInputEmail1">Code :</label>
+                            <input type="text" class="form-control" formControlName="code" placeholder="code">
+                           
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputEmail1">Tên học phần :</label>
+                            <input type="text" class="form-control" formControlName="tenhp" placeholder="tên học phần">
+                         
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" [(ngModel)]="hocky" [value]="2">
-                        <label class="form-check-label">
-                            Học kì 2
-                        </label>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="exampleInputEmail1">số tín chỉ :</label>
+                            <input type="number" class="form-control" formControlName="sotc" placeholder="số tín chỉ">
+                          
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputEmail1">Hệ số :</label>
+                            <input type="number" class="form-control" formControlName="heso" placeholder="hệ số">
+                        
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tiêu đề :</label>
+                        <input type="text" class="form-control" formControlName="tieude" placeholder="Tiêu đề">
+                    
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label for="exampleInputEmail1">ghi chú:</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="ghichu"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Học kì:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" formControlName="hocky" [value]="1">
+                                <label class="form-check-label">
+                                    Học kì 1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" formControlName="hocky" [value]="2">
+                                <label class="form-check-label">
+                                    Học kì 2
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+           
             </div>
             <div class="modal-footer">
                 <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
@@ -268,6 +296,7 @@
         </div>
     </div>
 </div>
+
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#ffbe76" type="pacman">
     <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>

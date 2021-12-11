@@ -14,7 +14,7 @@ export class LayoutAdminComponent implements OnInit {
   hovaten:any;
   ngOnInit(): void {
     this. admin = JSON.parse(localStorage.getItem('admin')|| '{}');
-      this.hovaten =this. admin.hovaten;
+      this.hovaten =this.admin.name;
     if(this.admin!=null){
       this.admin=parseInt(this.admin);
     }
@@ -25,7 +25,7 @@ export class LayoutAdminComponent implements OnInit {
       this.adminCPService.logout();
       alert("Đã đăng xuất");
       setTimeout(() => {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/admin/hocphan');
       }, 1000);
     }
     

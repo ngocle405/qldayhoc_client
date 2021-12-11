@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { GiaovienService } from 'src/app/services/giaovien.service';
+import { QuanlythongtinService } from 'src/app/services/quanlythongtin.service';
+
 
 @Component({
   selector: 'app-xemhoso',
@@ -10,7 +11,7 @@ import { GiaovienService } from 'src/app/services/giaovien.service';
 })
 export class XemhosoComponent implements OnInit {
   magv: any;
-  constructor(private giaovienService: GiaovienService, private route: ActivatedRoute, private spinner: NgxSpinnerService,) { }
+  constructor(private quanlythongtinService: QuanlythongtinService, private route: ActivatedRoute, private spinner: NgxSpinnerService,) { }
   giaoviens: any;
   ngOnInit(): void {
     this.spinner.show();
@@ -19,7 +20,7 @@ export class XemhosoComponent implements OnInit {
   }
   getByID(magv: any) {
    
-    this.giaovienService.getByid(magv).subscribe(data => {
+    this.quanlythongtinService.ChiTietGiaoVien(magv).subscribe(data => {
       this.giaoviens = data;
       this.spinner.hide();
     })

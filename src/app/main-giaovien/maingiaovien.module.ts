@@ -5,13 +5,13 @@ import { Routes ,RouterModule} from '@angular/router';
 import { MainGiaovienComponent } from './main-giaovien.component';
 import { LayoutGiaovienComponent } from '../Layout/layout-giaovien/layout-giaovien.component';
 import { LayoutModule } from '../Layout/Layout.module';
-import { MainComponent } from '../main/main.component';
-import { GiaovienGuard } from '../article/giaovien.guard';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GiangdayComponent } from './giangday/giangday.component';
 
 //
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -20,19 +20,20 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HoctructuyenComponent } from './hoctructuyen/hoctructuyen.component';
 //
 import { NgbModule,NgbPaginationModule,NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { BaitapdanopComponent } from './baitapdanop/baitapdanop.component';
+
 import { HosogiaovienComponent } from './hosogiaovien/hosogiaovien.component';
+import { ChitietbaitapComponent } from './chitietbaitap/chitietbaitap.component';
 export const mainRoutes: Routes = [
     {
         path: '',
         component: MainGiaovienComponent,
         children: [
-            { path: 'lophoc', component: LophocComponent},
-            { path: 'lophoc/giangday/:magiangday', component: GiangdayComponent},
+            { path: 'DanhSachLopGiangDayTrucTuyen', component: LophocComponent},
+            { path: 'XemChiTietLopGiangDay/:magiangday', component: GiangdayComponent},
             { path: 'dashboard', component: DashboardComponent},
             { path: 'hoctructuyen', component: HoctructuyenComponent},
-            { path: 'baitapdanop/:mabt', component: BaitapdanopComponent},
-            { path: 'hosogiaovien', component: HosogiaovienComponent},
+            { path: 'ChiTietBaiTap/:mabt', component: ChitietbaitapComponent},
+            { path: 'hosogiaovien/:magv', component: HosogiaovienComponent},
         
         ]
     }
@@ -48,8 +49,9 @@ export const mainRoutes: Routes = [
         DashboardComponent,
         GiangdayComponent,
         HoctructuyenComponent,
-        BaitapdanopComponent,
+   
         HosogiaovienComponent,
+        ChitietbaitapComponent,
       
         //import layout
     ],
@@ -62,6 +64,7 @@ export const mainRoutes: Routes = [
         TableModule,
         NgxSpinnerModule,
         NgbPaginationModule,
+        ConfirmPopupModule,
         RouterModule.forChild(mainRoutes)
     ],
     

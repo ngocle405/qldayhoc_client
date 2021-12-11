@@ -102,7 +102,7 @@
                                                     class="btn btn-default mr-1">
                                                     <i class="fa fa-id-card" style="color:red"></i></a>
                                                 <button type="button" class="btn btn-default"
-                                                    (click)="deleteClick(item)"><i class="fa fa-trash"
+                                                    (click)="DeleteGiaoVien(item)"><i class="fa fa-trash"
                                                         style="color:red"></i></button>
                                             </td>
                                         </tr>
@@ -238,7 +238,7 @@
                 <div class="modal-footer">
                     <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                         class="btn btn-default">Close</button>
-                    <button type="button" (click)="add()" [disabled]="!formAdd.valid" class="btn btn-primary">Thêm mới </button>
+                    <button type="button" (click)="ThemGiaoVien()" [disabled]="!formAdd.valid" class="btn btn-primary">Thêm mới </button>
                 </div>
             </form>
         </div>

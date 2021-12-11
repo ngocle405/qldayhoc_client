@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import {FormGroup,FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginGiaovienComponent } from './login-giaovien.component';
-
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [LoginGiaovienComponent,],
@@ -12,6 +12,7 @@ import { LoginGiaovienComponent } from './login-giaovien.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastModule,
     RouterModule.forChild([
       {
         path: '',

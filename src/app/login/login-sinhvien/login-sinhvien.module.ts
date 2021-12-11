@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { ToastModule } from 'primeng/toast';
 import {FormGroup,FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginSinhvienComponent } from './login-sinhvien.component';
 
@@ -12,7 +12,7 @@ import { LoginSinhvienComponent } from './login-sinhvien.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,ToastModule,
     RouterModule.forChild([
       {
         path: '',

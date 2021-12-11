@@ -4,7 +4,8 @@ import { disableDebugTools } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
-import { SinhvienService } from 'src/app/services/sinhvien.service';
+import { QuanlythongtinService } from 'src/app/services/quanlythongtin.service';
+
 
 @Component({
   selector: 'app-sinhvien',
@@ -14,7 +15,7 @@ import { SinhvienService } from 'src/app/services/sinhvien.service';
 })
 export class SinhvienComponent implements OnInit {
 
-  constructor(private sinhvienService: SinhvienService,
+  constructor(private quanlythongtinService: QuanlythongtinService,
     private router: Router,
     private readonly messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -46,6 +47,7 @@ export class SinhvienComponent implements OnInit {
     this.formAdd = this.fb.group({
       masv: this.fb.control('', [Validators.required]),
       tensv: this.fb.control('', [Validators.required]),
+      gioitinh: this.fb.control(0),
       malop: this.fb.control('', [Validators.required]),
       ngaysinh: this.fb.control('', [Validators.required]),
       diachinha: this.fb.control('', [Validators.required]),
@@ -60,6 +62,7 @@ export class SinhvienComponent implements OnInit {
     this.formEdit = this.fb.group({
       masv: this.fb.control('', [Validators.required]),
       tensv: this.fb.control('', [Validators.required]),
+      gioitinh: this.fb.control(true),
       malop: this.fb.control('', [Validators.required]),
       ngaysinh: this.fb.control('', [Validators.required]),
       diachinha: this.fb.control('', [Validators.required]),
@@ -75,15 +78,7 @@ export class SinhvienComponent implements OnInit {
 
   }
 
-  DsSinhvien() {
-    //this.spinner.show();
-    this.sinhvienService.getAll().subscribe(data => {
-      this.sinhviens = data;
-      // this.totalLength = data.length;
-      console.log(this.sinhviens);
-      this.spinner.hide();
-    });
-  }
+ 
   loadData(page: any): void {
     // this.spinner.show();
     if (this.checkSearch == true) this.page = 1;
@@ -96,12 +91,14 @@ export class SinhvienComponent implements OnInit {
        sortByCreatedDate: this.sortByCreatedDate,
     }
     setTimeout(() => {
-      this.sinhvienService
-        .pagination(data)
+      this.quanlythongtinService
+        .DanhSachSinhVien(data)
         //.pipe(first())
         .subscribe({
           next: (model: any) => {
+         
             this.sinhviens = model.data;
+            console.log(model.data);
             this.totalRecords = model.totalItems;
             this.checkSearch = false;
             this.spinner.hide();
@@ -115,7 +112,7 @@ export class SinhvienComponent implements OnInit {
     this.loadData(1);
   }
   DsLophoc(){
-    this.sinhvienService.getLophoc().subscribe((data: any) => {
+    this.quanlythongtinService.getLophoc().subscribe((data: any) => {
       this.lophocs = data;//lay du lieu 
       this.malop=this.malop;
     });
@@ -128,20 +125,20 @@ export class SinhvienComponent implements OnInit {
     //   gvcn: this.formLop.get('gvcn')?.value,
     //   khoa: this.formLop.get('khoa')?.value,
     // };
-    this.sinhvienService.add(this.formAdd.value).subscribe((data: any) => {
+    this.quanlythongtinService.ThemSinhVien(this.formAdd.value).subscribe((data: any) => {
       alert(data.toString());
       // this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã thêm thành công' });
       setTimeout(() => {
-        this.router.navigateByUrl('/admin/sinhvien');
+        this.loadData(1);
       }, 1000);
-      location.reload();
+      // location.reload();
     })
 
   }
   onEdit(masv: any): void {
 
-    this.sinhvienService
-      .getByid(masv)
+    this.quanlythongtinService
+      .ChiTietSinhVien(masv)
 
       .subscribe({
         next: (loai) => {
@@ -150,6 +147,7 @@ export class SinhvienComponent implements OnInit {
           this.formEdit = this.fb.group({
             masv: this.fb.control(loai.masv, [Validators.required]),
             tensv: this.fb.control(loai.tensv, [Validators.required]),
+            gioitinh: this.fb.control(JSON.parse(loai.gioitinh)),
             malop: this.fb.control(loai.malop, [Validators.required]),
             ngaysinh: this.fb.control(loai.ngaysinh, [Validators.required]),
             diachinha: this.fb.control(loai.diachinha, [Validators.required]),
@@ -173,28 +171,29 @@ export class SinhvienComponent implements OnInit {
   }
   update() {
     if (this.id_Edit > 0) {
-      this.sinhvienService.update(this.id_Edit, this.formEdit.value).subscribe((data: any) => {
+      this.quanlythongtinService.UpdateSinhVien(this.id_Edit, this.formEdit.value).subscribe((data: any) => {
         alert(data.toString());
-        location.reload();
+        // location.reload();
         setTimeout(() => {
-          this.router.navigateByUrl('/admin/sinhvien');
+          this.loadData(1);
         }, 1000);
       })
     }
   }
   closeClick() {
     setTimeout(() => {
-      this.router.navigateByUrl('/admin/sinhvien');
+      // this.router.navigateByUrl('/admin/sinhvien');
+      this.loadData(1);
     }, 1000);
     //this.clear();
   }
-  deleteClick(item: any) {
+  DeleteSinhvien(item: any) {
     this.confirmationService.confirm({
       message: 'Bạn có muốn loại bỏ sinh viên này ?',
       accept: () => {
-        this.sinhvienService.delete(item.masv).subscribe(data => {
+        this.quanlythongtinService.DeleteSinhvien(item.masv).subscribe(data => {
           this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã xóa thành công.' });
-          this.DsSinhvien();
+          this.loadData(1);
         });
 
       },
@@ -214,6 +213,8 @@ export class SinhvienComponent implements OnInit {
 
   clearFormAdd() {
     this.formAdd.reset();
+    
   }
+  
 
 }

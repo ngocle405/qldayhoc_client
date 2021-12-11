@@ -10,6 +10,7 @@ import { LayoutModule } from '../Layout/Layout.module';
 
 
 //
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -39,7 +40,7 @@ export const mainRoutes: Routes = [
              { path: 'danhsachlophoc', component: GochoctapComponent},
              { path: 'chitietlophoc/:mahoctap', component: ChitietlophocComponent},
              { path: 'chitietbaitap/:mabt', component: ChitietbaitapComponent},
-             { path: 'hosocanhan', component: HosocanhanComponent},
+             { path: 'hosocanhan/:masv', component: HosocanhanComponent},
         
         ]
     }
@@ -63,6 +64,7 @@ export const mainRoutes: Routes = [
         TableModule,
         NgxSpinnerModule,
         NgbPaginationModule,
+        ConfirmPopupModule,
         RouterModule.forChild(mainRoutes)
     ],
     

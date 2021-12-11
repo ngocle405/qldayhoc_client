@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SinhvienService } from 'src/app/services/sinhvien.service';
+
+import { TrangsinhvienService } from 'src/app/services/trangsinhvien.service';
 
 @Component({
   selector: 'app-gochoctap',
@@ -10,7 +11,7 @@ import { SinhvienService } from 'src/app/services/sinhvien.service';
 })
 export class GochoctapComponent implements OnInit {
   
-  constructor(private readonly lophocService:SinhvienService, private fb: FormBuilder,  private router: Router,private route: ActivatedRoute,) { }
+  constructor(private readonly trangsinhvienService:TrangsinhvienService, private fb: FormBuilder,  private router: Router,private route: ActivatedRoute,) { }
   lopdays:any;
   sv:any;
   magiangday:any;
@@ -22,7 +23,7 @@ export class GochoctapComponent implements OnInit {
   
   DSlop(masv:any) {
     //this.spinner.show();
-    this.lophocService.gochoctap(masv).subscribe(data => {
+    this.trangsinhvienService.gochoctap(masv).subscribe(data => {
       this.lopdays = data;
    //   this.totalLength = data.length;
       console.log(this.lopdays);

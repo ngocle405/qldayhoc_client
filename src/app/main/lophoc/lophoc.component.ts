@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
-import { LophocService } from 'src/app/services/lophoc.service';
+
+import { QuanlythongtinService } from 'src/app/services/quanlythongtin.service';
 
 @Component({
   selector: 'app-lophoc',
@@ -13,7 +14,8 @@ import { LophocService } from 'src/app/services/lophoc.service';
 })
 export class LophocComponent implements OnInit {
 
-  constructor(private lophocService: LophocService,
+  constructor(
+    private quanlythongtinService: QuanlythongtinService,
     private router: Router,
     private readonly messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -76,8 +78,8 @@ export class LophocComponent implements OnInit {
      // sortByCreatedDate: this.sortByCreatedDate,
     }
     setTimeout(() => {
-      this.lophocService
-        .pagination(data)
+      this.quanlythongtinService
+        .DanhSachLop(data)
          //.pipe(first())
         .subscribe({
           next: (model: any) => {
@@ -90,16 +92,7 @@ export class LophocComponent implements OnInit {
         });
     }, 300);
   }
-  DsLop() {
-    //this.spinner.show();
-    this.lophocService.getAll().subscribe(data => {
-      this.lophocs = data;
-     // this.totalLength = data.length;
-      console.log(this.lophocs);
-      this.ds = data;
-      this.spinner.hide();
-    });
-  }
+
   onSearch(): void {
     this.checkSearch = true;
     this.loadData(1);
@@ -113,23 +106,23 @@ export class LophocComponent implements OnInit {
     //   gvcn: this.formAdd.get('gvcn')?.value,
     //   khoa: this.formAdd.get('khoa')?.value,
     // };
-    this.lophocService.add(this.formAdd.value).subscribe((data: any) => {
+    this.quanlythongtinService.ThemLop(this.formAdd.value).subscribe((data: any) => {
        alert(data.toString());
      // this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã thêm thành công' });
-      setTimeout(() => {
-        this.router.navigateByUrl('/lophoc');
-      }, 1000);
-      location.reload();
+       this.loadData(1);
+      // location.reload();
     })
 
   }
   onEdit(mahp: any): void {
   
-    this.lophocService
-      .getByid(mahp)
+    this.quanlythongtinService
+      .ChiTietLop(mahp)
 
       .subscribe({
+        
         next: (loai) => {
+          
           this.id_Edit=loai.malop;
           console.log(loai);
           this.formEdit = this.fb.group({
@@ -150,18 +143,20 @@ export class LophocComponent implements OnInit {
   }
   update(){
     if(this.id_Edit>0){
-      this.lophocService.update(this.id_Edit,this.formEdit.value).subscribe((data: any) => {
+      this.quanlythongtinService.UpdateLop(this.id_Edit,this.formEdit.value).subscribe((data: any) => {
         alert(data.toString());
-        location.reload();
+     
          setTimeout(() => {
-          this.router.navigateByUrl('/lophoc');
+           this.loadData(1);
+          // this.router.navigateByUrl('/lophoc');
         }, 1000);
       })
     }
   }
   closeClick() {
     setTimeout(() => {
-      this.router.navigateByUrl('/lophoc');
+      this.loadData(1);
+      // this.router.navigateByUrl('/lophoc');
     }, 1000);
     //this.clear();
   }
@@ -169,9 +164,9 @@ export class LophocComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Bạn có muốn xóa lớp học này ?',
       accept: () => {
-        this.lophocService.delete(item.malop).subscribe(data => {
+        this.quanlythongtinService.DeleteLop(item.malop).subscribe(data => {
           this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã xóa thành công.' });
-          this.DsLop();
+          this.loadData(1);
         });
 
       },

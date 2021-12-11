@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GiangdayService } from 'src/app/services/giangday.service';
+
+import { TrangsinhvienService } from 'src/app/services/trangsinhvien.service';
 
 @Component({
   selector: 'app-hoctructuyen',
@@ -8,7 +9,7 @@ import { GiangdayService } from 'src/app/services/giangday.service';
 })
 export class HoctructuyenComponent implements OnInit {
 
-  constructor(private giangdayService:GiangdayService) { }
+  constructor(private trangsinhvienService:TrangsinhvienService) { }
   loptructuyens:any=[];
   checkSearch:boolean=false;
   pageSize = 5;
@@ -20,15 +21,7 @@ export class HoctructuyenComponent implements OnInit {
     //this.DsLoptructuyen();
     this.loadData(1);
   }
-  DsLoptructuyen() {
-    //this.spinner.show();
-    this.giangdayService.getAll().subscribe(data => {
-      this.loptructuyens = data;
-     // this.totalLength = data.length;
-      console.log(this.loptructuyens);
-      
-    });
-  }
+
   loadData(page: any): void {
     // this.spinner.show();
     if (this.checkSearch == true) this.page = 1;
@@ -41,8 +34,8 @@ export class HoctructuyenComponent implements OnInit {
      // sortByCreatedDate: this.sortByCreatedDate,
     }
     setTimeout(() => {
-      this.giangdayService
-        .pagination(data)
+      this.trangsinhvienService
+        .HocTrucTuyen(data)
          //.pipe(first())
         .subscribe({
           next: (model: any) => {

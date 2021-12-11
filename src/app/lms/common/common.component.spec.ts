@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChitietlophocComponent } from './chitietlophoc.component';
+import { CommonComponent } from './common.component';
 
-describe('ChitietlophocComponent', () => {
-  let component: ChitietlophocComponent;
-  let fixture: ComponentFixture<ChitietlophocComponent>;
+describe('CommonComponent', () => {
+  let component: CommonComponent;
+  let fixture: ComponentFixture<CommonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChitietlophocComponent ]
+      declarations: [ CommonComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChitietlophocComponent);
+    fixture = TestBed.createComponent(CommonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

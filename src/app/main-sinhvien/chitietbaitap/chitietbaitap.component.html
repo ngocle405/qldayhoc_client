@@ -105,6 +105,7 @@
                             </td>
                             <td class="mailbox-name">{{item.nguoitao}} {{item.tieude}} {{item.noidung}}</td>
                             <td class="mailbox-date">{{item.ngaytao | date:'dd/MM/yyyy'}}</td>
+                            <td class="mailbox-date"><button (click)="HuyBaiTap(item)" class="btn-primary"> Hủy nộp</button></td>
                           </tr>
                         </tbody>
                       </table>
@@ -127,3 +128,7 @@
       <!-- /.tab-content -->
     </div><!-- /.card-body -->
   </div>
+  <p-toast></p-toast>
+
+
+<p-confirmPopup></p-confirmPopup>

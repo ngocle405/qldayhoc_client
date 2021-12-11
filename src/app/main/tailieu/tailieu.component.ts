@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
-import { TailieuService } from 'src/app/services/tailieu.service';
+import { QuanlythongtinService } from 'src/app/services/quanlythongtin.service';
+
 
 @Component({
   selector: 'app-tailieu',
@@ -11,7 +12,7 @@ import { TailieuService } from 'src/app/services/tailieu.service';
 })
 export class TailieuComponent implements OnInit {
 
-  constructor(private tailieuService:TailieuService, private spinner: NgxSpinnerService,private readonly messageService: MessageService,
+  constructor(private quanlythongtinService:QuanlythongtinService, private spinner: NgxSpinnerService,private readonly messageService: MessageService,
     private confirmationService: ConfirmationService,) { }
   tailieus:any=[];
  //
@@ -37,8 +38,8 @@ export class TailieuComponent implements OnInit {
       sortByCreatedDate: this.sortByCreatedDate,
     }
     setTimeout(() => {
-      this.tailieuService
-        .pagination(data)
+      this.quanlythongtinService
+        .DanhSachTaiLieu(data)
          //.pipe(first())
         .subscribe({
           next: (model: any) => {
@@ -55,11 +56,11 @@ export class TailieuComponent implements OnInit {
     this.checkSearch = true;
     this.loadData(1);
   }
-  deleteClick(item: any) {
+  DeleteTailieu(item: any) {
     this.confirmationService.confirm({
       message: 'Bạn có muốn xóa tài liệu này ?',
       accept: () => {
-        this.tailieuService.delete(item.mafile).subscribe(data => {
+        this.quanlythongtinService.DeleteTailieu(item.matailieu).subscribe(data => {
           this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã xóa thành công.' });
           this.loadData(1);
         });

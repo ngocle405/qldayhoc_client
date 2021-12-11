@@ -4,13 +4,16 @@ import { RouterModule } from '@angular/router';
 
 import {FormGroup,FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginAdminComponent } from './login-admin.component';
-
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [LoginAdminComponent,],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TableModule,
+    ToastModule,
     RouterModule.forChild([
       {
         path: '',

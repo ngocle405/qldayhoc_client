@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AdminLTE 3 | Log in admin</title>
-
-    <!-- Google Font: Source Sans Pro -->
-
-</head>
 <div class="hold-transition login-page">
     <div class="login-box">
         <div class="card">
@@ -44,20 +32,24 @@
                         *ngIf="formLogin.controls.password?.errors?.required && formLogin.controls.password?.touched">
                         Mật khẩu không được để trống!
                     </div>
+                    
+                        <input type="submit" [disabled]="!formLogin.valid" class="form-control" value="Log in">
                    
-                    <input type="submit" [disabled]="!formLogin.valid" class="form-control" value="Log in">
+                  
                 </form>
 
-
+               
                 <!-- /.social-auth-links -->
-
+                <p style="float: right;text-decoration: none;margin-top: 10px;" class="mb-1">
+                    <a routerLink="/">Quay về trang chủ</a>
+                </p>
 
             </div>
             <!-- /.login-card-body -->
-
+           
 
         </div>
     </div>
 </div>
 
-</html>
+<p-toast></p-toast>

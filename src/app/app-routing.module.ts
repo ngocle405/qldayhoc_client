@@ -4,12 +4,13 @@ import { AuthGuard } from './article/auth.guard';
 import { GiaovienGuard } from './article/giaovien.guard';
 import { SinhvienGuard } from './article/sinhvien.guard';
 
-import { HomeComponent } from './main/home/home.component';
-
-import { MainComponent } from './main/main.component';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./lms/lms/lms.module').then((m) => m.LmsModule)
+  },
+  {
+    path: 'admin',
     loadChildren: () => import('./main/main.module').then((m) => m.MainModule), canActivate: [AuthGuard]
   },
   {

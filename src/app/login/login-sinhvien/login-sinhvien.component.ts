@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SinhvienService } from 'src/app/services/sinhvien.service';
+import { MessageService } from 'primeng/api';
+
+import { TrangsinhvienService } from 'src/app/services/trangsinhvien.service';
 
 @Component({
   selector: 'app-login-sinhvien',
   templateUrl: './login-sinhvien.component.html',
-  styleUrls: ['./login-sinhvien.component.css']
+  styleUrls: ['./login-sinhvien.component.css'],
+  providers: [MessageService]
 })
 export class LoginSinhvienComponent implements OnInit {
   formLogin !: FormGroup ;
   constructor(    private fb: FormBuilder,
-    private sinhvienService: SinhvienService,
+    private readonly messageService: MessageService,
+    private trangsinhvienService: TrangsinhvienService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -31,21 +35,23 @@ export class LoginSinhvienComponent implements OnInit {
       matkhau: this.formLogin.get('matkhau') ?.value 
     };
 
-    this.sinhvienService
+    this.trangsinhvienService
       .login(gvLogin)
     
       .subscribe(
         (gv) => {
           if (gv == null) {
-            alert("tài khoản hoặc mật khẩu chưa đúng")
-            this.clearFormLogin();
+            this.messageService.add({ severity: 'info', summary: 'Thông báo', detail: 'Tài khoản hoặc mật khẩu chưa đúng.' });
+            setTimeout(() => {
+              this.clearFormLogin();
+            }, 2000);
             
           } else if(gv!="") {
             
-            alert("welcome to student");
+            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã đăng nhập thành công.' });
             setTimeout(() => {
               this.router.navigateByUrl('/sinhvien/dashboard');
-            }, 1000);
+            }, 2000);
           }
           console.log(gv);
         },

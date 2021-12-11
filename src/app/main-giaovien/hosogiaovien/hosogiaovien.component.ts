@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { GiaovienService } from 'src/app/services/giaovien.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { TranggiaovienService } from 'src/app/services/tranggiaovien.service';
 
 @Component({
   selector: 'app-hosogiaovien',
@@ -9,8 +10,9 @@ import { GiaovienService } from 'src/app/services/giaovien.service';
 })
 export class HosogiaovienComponent implements OnInit {
 
-  constructor(private giaovienService: GiaovienService, private router: Router) { }
+  constructor(private tranggiaovienService: TranggiaovienService, private route: ActivatedRoute, private router: Router) { }
   gv: any;
+ 
   magv: any;
   tengv: any;
   diachi: any;
@@ -30,16 +32,28 @@ export class HosogiaovienComponent implements OnInit {
   chuyennganh: any;
   trinhdohocvan: any;
   PhotoFilePath: any;
-  
   matkhau: any;
+  //
+  id_edit:any;
   ngOnInit(): void {
+
     this.gv = JSON.parse(localStorage.getItem('teacher') || '{}');
-   console.log(this.gv);
+    this.magv = this.route.snapshot.paramMap.get('magv');
+    this.id_edit=this.gv.magv;
+    this.CtGiaovien(this.magv);//ở dưới
+
+  }
+  CtGiaovien(magv: any) {
+    this.tranggiaovienService.ChiTietGiaoVien(magv).subscribe(res => {
+      this.gv = res;
+    })
+
+
   }
   onEdit(magv: any): void {
 
-    this.giaovienService
-      .getByid(magv)
+    this.tranggiaovienService
+      .ChiTietGiaoVien(magv)
 
       .subscribe({
         next: (loai) => {
@@ -65,7 +79,7 @@ export class HosogiaovienComponent implements OnInit {
             this.dantoc = loai.dantoc,
             this.tongiao = loai.tongiao,
             this.matkhau = loai.matkhau
-        
+
         },
 
       });
@@ -91,15 +105,17 @@ export class HosogiaovienComponent implements OnInit {
       chucdanhkythuat: this.chucdanhkythuat,
       chuyennganh: this.chuyennganh,
       bangcap: this.bangcap,
-      matkhau:this.matkhau
-  
+      matkhau: this.matkhau
+
     }
-    this.giaovienService.update(val).subscribe(res => {
+    this.tranggiaovienService.update(this.id_edit,val).subscribe(res => {
       // localStorage.setItem('user', JSON.stringify(this.user));
-      alert("Đã sửa thông tin cá nhân,yêu cầu bạn đăng nhập lại");
-      console.log(res);
-      location.reload();
-      //this.logout();
+      alert("Đã sửa thông tin cá nhân,bạn sẽ đăng xuất sau 5s");
+      this.CtGiaovien(this.magv);
+       setTimeout(() => {
+        this.logout();
+       }, 5000);
+      //
     });
   }
   public uploadPhoto(event: any) {
@@ -108,16 +124,16 @@ export class HosogiaovienComponent implements OnInit {
     const formData: FormData = new FormData();
     formData.append('uploadedFile', file);
     console.log(formData)
-    this.giaovienService.UploadPhoto(formData).subscribe((data: any) => {
+    this.tranggiaovienService.UploadPhotos(formData).subscribe((data: any) => {
       this.anhdaidien = data.toString();
-      this.PhotoFilePath = this.giaovienService.PhotoUrl + this.anhdaidien;
+      this.PhotoFilePath = this.tranggiaovienService.PhotoUrl + "giaovien/" + this.anhdaidien;
     })
   }
   logout() {
-    this.giaovienService.logout();
+    this.tranggiaovienService.logout();
     setTimeout(() => {
       this.router.navigateByUrl('/giaovien/login');
-    }, 1000);
+    }, 0);
   }
 
 }
