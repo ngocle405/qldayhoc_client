@@ -7,9 +7,9 @@ import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/a
 import { QuanlythongtinService } from 'src/app/services/quanlythongtin.service';
 
 @Component({
-  selector: 'app-lophoc',
-  templateUrl: './lophoc.component.html',
-  styleUrls: ['./lophoc.component.css'],
+  selector: 'app-lophoc',//Là tên được đặt để gọi một component trong html
+  templateUrl: './lophoc.component.html',//: Là đường dẫn url tới file html bên ngoài 
+  styleUrls: ['./lophoc.component.css'],//Là đường dẫn url đến file style css độc lập cho component này.
   providers: [MessageService, ConfirmationService],
 })
 export class LophocComponent implements OnInit {
@@ -26,7 +26,7 @@ export class LophocComponent implements OnInit {
   tenlop: any;
   siso: any;
   gvcn: any;
-
+  displayEdit: boolean = false;
   khoa: any;
   malop: any;
 
@@ -106,11 +106,25 @@ export class LophocComponent implements OnInit {
     //   gvcn: this.formAdd.get('gvcn')?.value,
     //   khoa: this.formAdd.get('khoa')?.value,
     // };
-    this.quanlythongtinService.ThemLop(this.formAdd.value).subscribe((data: any) => {
-       alert(data.toString());
-     // this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã thêm thành công' });
-       this.loadData(1);
-      // location.reload();
+    this.quanlythongtinService.ThemLop(this.formAdd.value).subscribe({
+      next:() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Thông báo',
+            detail: 'Thêm lớp thành công !',
+          });
+          setTimeout(() => {
+            this.loadData(1);
+         }, 1000);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Thông báo',
+          detail: `Đã có lỗi !`,
+        });
+      },
     })
 
   }
@@ -122,7 +136,7 @@ export class LophocComponent implements OnInit {
       .subscribe({
         
         next: (loai) => {
-          
+          this.displayEdit = true;
           this.id_Edit=loai.malop;
           console.log(loai);
           this.formEdit = this.fb.group({
@@ -143,13 +157,26 @@ export class LophocComponent implements OnInit {
   }
   update(){
     if(this.id_Edit>0){
-      this.quanlythongtinService.UpdateLop(this.id_Edit,this.formEdit.value).subscribe((data: any) => {
-        alert(data.toString());
-     
-         setTimeout(() => {
-           this.loadData(1);
-          // this.router.navigateByUrl('/lophoc');
-        }, 1000);
+      this.quanlythongtinService.UpdateLop(this.id_Edit,this.formEdit.value).subscribe({
+        next: (res) => {
+          //console.log(res);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Thông báo',
+              detail: 'sửa lớp thành công !',
+            });
+            setTimeout(() => {
+              this.loadData(1);
+           }, 1000);
+        },
+        error: (err) => {
+          console.log(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Thông báo',
+            detail: `Đã có lỗi !`,
+          });
+        },
       })
     }
   }
@@ -158,7 +185,7 @@ export class LophocComponent implements OnInit {
       this.loadData(1);
       // this.router.navigateByUrl('/lophoc');
     }, 1000);
-    //this.clear();
+    
   }
   deleteClick(item: any) {
     this.confirmationService.confirm({

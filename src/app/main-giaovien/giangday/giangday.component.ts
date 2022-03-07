@@ -100,12 +100,11 @@ export class GiangdayComponent implements OnInit {
       //console.log(data);
     });
   }
-  //lấy id sinh viên
+  //lấy id sinh viên ,để tiếp tục ấn thêm
   onEdit(masv: any): void {
 
     this.tranggiaovienService
       .ChiTietSinhVien(masv)
-
       .subscribe({
         next: (loai) => {
           this.id_Edit = loai.masv;
@@ -119,15 +118,30 @@ export class GiangdayComponent implements OnInit {
       });
 
   }
-  //thêm sv
+  //thêm sv vào lớp học giảng dạy
   ThemSinhVienVaoLop() {
-    this.tranggiaovienService.ThemSinhVienVaoLop(this.formLayIdSinhVien.value).subscribe((data: any) => {
-      alert(data.toString());
-      this.Sinhvienduocthemvaolop(this.magiangday);
-      // this.clearFormAddBaigiang();
+    this.tranggiaovienService.ThemSinhVienVaoLop(this.formLayIdSinhVien.value).subscribe({
+      next: (res) => {
+        //console.log(res);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Thông báo',
+            detail: 'Thêm sinh viên vào lớp thành công !',
+          });
+          this.Sinhvienduocthemvaolop(this.magiangday);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Thông báo',
+          detail: `Đã có lỗi !`,
+        });
+      },
+
     })
   }
- //sinh viên chưa có trong lớp
+ //sinh viên chưa có trong lớp,hiển thị sv
  
   Sinhvienchuacotronglop(page:any) {
     if (this.checkSearch == true) this.page = 1;
@@ -155,6 +169,22 @@ export class GiangdayComponent implements OnInit {
     }, 300);
   
   }
+  //xóa sv ra khỏi lớp
+  XoaSinhVienRaKhoiLop(item: any) {
+
+    this.confirmationService.confirm({
+      message: 'Bạn có muốn xóa sinh viên này ?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.tranggiaovienService.XoaSinhVienRaKhoiLop(item.mahoctap).subscribe(data => {
+          this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã xóa thành công.' });
+          this.Sinhvienduocthemvaolop(this.magiangday);
+        });
+      },
+
+    })
+    
+  };
   onSearch(): void {
     this.checkSearch = true;
     this.Sinhvienchuacotronglop(1);

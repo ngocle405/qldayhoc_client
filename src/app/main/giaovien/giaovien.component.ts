@@ -103,12 +103,25 @@ export class GiaovienComponent implements OnInit {
       chuyennganh: this.formAdd.get('chuyennganh')?.value,
       quoctich: this.formAdd.get('quoctich')?.value,
     };
-    this.quanlythongtinService.ThemGiaoVien(val).subscribe((data: any) => {
-      alert(data.toString());
-      setTimeout(() => {
-        this.loadData(1);
-        // this.router.navigateByUrl('/giaovien');
-      }, 1000);
+    this.quanlythongtinService.ThemGiaoVien(val).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Thông báo',
+          detail: 'Thêm giáo viên thành công !',
+        });
+        setTimeout(() => {
+          this.loadData(1);
+        }, 1000);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Thông báo',
+          detail: `Đã có lỗi !`,
+        });
+      },
     })
 
   }

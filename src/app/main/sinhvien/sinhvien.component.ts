@@ -45,18 +45,18 @@ export class SinhvienComponent implements OnInit {
    // this.DsSinhvien();
     this.DsLophoc();
     this.formAdd = this.fb.group({
-      masv: this.fb.control('', [Validators.required]),
-      tensv: this.fb.control('', [Validators.required]),
+      masv: this.fb.control('10118', [Validators.required]),
+      tensv: this.fb.control('đỗ văn ', [Validators.required]),
       gioitinh: this.fb.control(0),
       malop: this.fb.control('', [Validators.required]),
-      ngaysinh: this.fb.control('', [Validators.required]),
-      diachinha: this.fb.control('', [Validators.required]),
-      email: this.fb.control('', [Validators.required]),
-      dienthoai: this.fb.control('', [Validators.required]),
-      matkhau: this.fb.control('', [Validators.required]),
+      ngaysinh: this.fb.control('2000-12-12', [Validators.required]),
+      diachinha: this.fb.control('hưng yên', [Validators.required]),
+      email: this.fb.control('test@gmail.com', [Validators.required]),
+      dienthoai: this.fb.control('0965557123', [Validators.required]),
+      matkhau: this.fb.control('123456', [Validators.required]),
       chuyennganh: this.fb.control('', [Validators.required]),
-      hedaotao: this.fb.control('', [Validators.required]),
-      nganhhoc: this.fb.control('', [Validators.required]),
+      hedaotao: this.fb.control('chính quy', [Validators.required]),
+      nganhhoc: this.fb.control('công nghệ thông tin', [Validators.required]),
       nienkhoa: this.fb.control('', [Validators.required]),
     });
     this.formEdit = this.fb.group({
@@ -125,13 +125,26 @@ export class SinhvienComponent implements OnInit {
     //   gvcn: this.formLop.get('gvcn')?.value,
     //   khoa: this.formLop.get('khoa')?.value,
     // };
-    this.quanlythongtinService.ThemSinhVien(this.formAdd.value).subscribe((data: any) => {
-      alert(data.toString());
-      // this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đã thêm thành công' });
-      setTimeout(() => {
-        this.loadData(1);
-      }, 1000);
-      // location.reload();
+    this.quanlythongtinService.ThemSinhVien(this.formAdd.value).subscribe( {
+     
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Thông báo',
+          detail: 'Thêm sinh viên thành công !',
+        });
+        setTimeout(() => {
+          this.loadData(1);
+        }, 1000);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Thông báo',
+          detail: `Đã có lỗi !`,
+        });
+      },
     })
 
   }
@@ -171,12 +184,25 @@ export class SinhvienComponent implements OnInit {
   }
   update() {
     if (this.id_Edit > 0) {
-      this.quanlythongtinService.UpdateSinhVien(this.id_Edit, this.formEdit.value).subscribe((data: any) => {
-        alert(data.toString());
-        // location.reload();
-        setTimeout(() => {
-          this.loadData(1);
-        }, 1000);
+      this.quanlythongtinService.UpdateSinhVien(this.id_Edit, this.formEdit.value).subscribe( {
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Thông báo',
+            detail: 'Sửa sinh viên thành công !',
+          });
+          setTimeout(() => {
+            this.loadData(1);
+          }, 1000);
+        },
+        error: (err) => {
+          console.log(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Thông báo',
+            detail: `Đã có lỗi !`,
+          });
+        },
       })
     }
   }

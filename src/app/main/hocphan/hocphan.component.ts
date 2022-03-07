@@ -122,15 +122,26 @@ export class HocphanComponent implements OnInit {
     //   code: this.formAdd.get('code')?.value,
     //   ghichu: this.formAdd.get('ghichu')?.value,
     // };
-    this.quanlythongtinService.ThemHocPhan(this.formAdd.value).subscribe((data: any) => {
-      alert(data.toString());
-      
-       setTimeout(() => {
-        this.loadData(1);
-      }, 1000);
-     
+    this.quanlythongtinService.ThemHocPhan(this.formAdd.value).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Thông báo',
+          detail: 'Thêm học phần thành công !',
+        });
+        setTimeout(() => {
+          this.loadData(1);
+        }, 1000);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Thông báo',
+          detail: `Đã có lỗi !`,
+        });
+      },
     })
-
   }
   onEdit(mahp: any): void {
 
@@ -158,11 +169,25 @@ export class HocphanComponent implements OnInit {
   }
 
   update() {
-    this.quanlythongtinService.UpdateHocPhan(this.id_Edit, this.formEdit.value).subscribe((data: any) => {
-      alert(data.toString());
-      setTimeout(() => {
-        this.loadData(1);
-      }, 1000);
+    this.quanlythongtinService.UpdateHocPhan(this.id_Edit, this.formEdit.value).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Thông báo',
+          detail: 'Thêm học phần thành công !',
+        });
+        setTimeout(() => {
+          this.loadData(1);
+        }, 1000);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Thông báo',
+          detail: `Đã có lỗi !`,
+        });
+      },
     })
   }
   closeClick() {

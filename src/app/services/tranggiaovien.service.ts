@@ -140,7 +140,7 @@ export class TranggiaovienService {
     const url = `${this.APIUrl}/DanhSachBaiTap/${mabg}`;
     return this.http.get<any>(url);
   }
-
+  
   ThemBaiTap(baigiang: any): Observable<number> {
     const url = `${this.APIUrl}/ThemBaiTap`;
     var body = JSON.stringify(baigiang);
@@ -191,6 +191,10 @@ export class TranggiaovienService {
     var body = JSON.stringify(sinhvien);
     return this.http.post<any>(url, body, httpOptions);
   
+  }
+  //xóa sinh viên ra khỏi lớp
+  XoaSinhVienRaKhoiLop(malop: any) {
+    return this.http.delete(this.APIUrl + '/XoaSinhVienRaKhoiLop/' + malop);
   }
   //#endregion
 

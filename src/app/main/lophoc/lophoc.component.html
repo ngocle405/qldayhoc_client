@@ -126,13 +126,13 @@
     <!-- container-fluid -->
 </div>
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade"  id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" style="width:70%" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Sửa thông tin lớp</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"  (click)="closeClick()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -179,17 +179,14 @@
                                 <option value="nna">Ngôn ngữ anh</option>
                                 <option value="ktdn">Kế toán - doanh nhiệp</option>
                             </select>
-                            <small class="form-text text-danger"
-                                *ngIf="formAdd.controls.khoa?.errors?.required && formAdd.controls.khoa?.touched">
-                                Khoa không được để trống!
-                            </small>
+                           
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                         class="btn btn-default">Close</button>
-                    <button type="button" (click)="update()" class="btn btn-primary">Update </button>
+                    <button type="button" data-dismiss="modal" (click)="update()" class="btn btn-primary">Update </button>
                 </div>
             </form>
            
@@ -271,7 +268,7 @@
                 <div class="modal-footer">
                     <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                         class="btn btn-default">Close</button>
-                    <button type="button" (click)="add()"  class="btn btn-primary">Thêm mới </button>
+                    <button type="button" (click)="add()" data-dismiss="modal" class="btn btn-primary">Thêm mới </button>
                 </div>
             </form>
         </div>

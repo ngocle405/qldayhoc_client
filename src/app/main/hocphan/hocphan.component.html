@@ -210,7 +210,7 @@
             <div class="modal-footer">
                 <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                     class="btn btn-default">Close</button>
-                <button type="button" (click)="add()" [disabled]="!formAdd.valid" class="btn btn-primary">Thêm
+                <button type="button" (click)="add()" [disabled]="!formAdd.valid" data-dismiss="modal" class="btn btn-primary">Thêm
                     mới</button>
             </div>
         </div>
@@ -289,9 +289,9 @@
            
             </div>
             <div class="modal-footer">
-                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                <button aria-label="Close" data-dismiss="modal" type="button"
                     class="btn btn-default">Close</button>
-                <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+                <button type="button" (click)="update()" data-dismiss="modal" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>

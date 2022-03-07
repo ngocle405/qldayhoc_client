@@ -42,11 +42,11 @@
                                 <tr>
                                   <th scope="col">#</th>
         
-                                  <th scope="col">Tiêu đề</th>
+                                  <th scope="col">Họ và tên</th>
         
-                                  <th scope="col">ma lop</th>
+                                  <th scope="col">Tên lớp dạy</th>
         
-                                  <th scope="col">Action</th>
+                                  <th scope="col">Loại bỏ</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -56,7 +56,9 @@
                                   <td >{{item.tensv}}</td>
         
                                   <td>{{item.malop}}</td>
-                                  
+                                  <td> 
+                                    <button type="button" class="btn btn-primary" (click)="XoaSinhVienRaKhoiLop(item)"><i class="fa fa-trash"></i></button>
+                                  </td>
                                  
         
         
@@ -587,7 +589,7 @@
           <input type="hidden" formControlName="masv" > 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="ThemSinhVienVaoLop()">Thêm vào</button>
+            <button type="button" class="btn btn-primary"  (click)="ThemSinhVienVaoLop()" data-dismiss="modal">Thêm vào</button>
           </div>
         </form>
       </div>

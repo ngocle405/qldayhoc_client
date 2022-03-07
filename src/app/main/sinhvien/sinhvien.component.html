@@ -14,10 +14,11 @@
                             <!-- <h4 class="mt-0 header-title mb-4">Suppliers</h4> -->
                             <div class="row mb-1">
                                 <div class="col-sm-9">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal" (click)="clearFormAdd()" data-backdrop="static" data-keyboard="false">
-                                    Add
-                                </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="clearFormAdd()"
+                                        data-backdrop="static" data-keyboard="false">
+                                        Add
+                                    </button>
+                                    <a style="margin-left: 5px;" href="http://localhost:44169/api/QuanLyThongTins/Export" target="" class="btn btn-primary">Export</a>
                                 
                                 </div>
                                 <div class="col-sm-3" style="display: flex;">
@@ -76,8 +77,8 @@
                                             <th scope="col">Họ tên</th>
                                             <th scope="col">Ngày sinh</th>
                                             <th scope="col">email</th>
-                                            <th scope="col">điện thoại cá nhân</th>
-                                            <th scope="col">Địa chỉ thường chú</th>
+                                            <th scope="col">điện thoại</th>
+                                            <th scope="col">Địa chỉ </th>
                                             <th scope="col">Giới tính</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -98,7 +99,7 @@
                                                     <span *ngIf="item.gioitinh==0;"
                                                     class="badge badge-success">Nữ</span>
                                                     <span *ngIf="item.gioitinh==null;"
-                                                    class="badge badge-danger">Chưa xác định</span>
+                                                    class="badge badge-danger">Null</span>
                                                 <!-- <ng-template #unactive>
                                                     <span class="badge badge-danger">Unactive</span>
                                                 </ng-template>  -->
@@ -222,20 +223,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-row form-group">
-                        <div class="col" >
-                            <label for="exampleInputEmail1">Giới tính:</label>
-                            
-                            <select class="form-control" formControlName="gioitinh">
-                      
-                                <option value="true">Nam</option>
-                                <option value="false">Nữ</option>
-                            </select>
-                          
-                        </div>
-                       
-                        
-                    </div>
+                  
                     <div class="form-row form-group">
                         <div class="col">
                             <label for="exampleInputEmail1">Niên khóa:</label>
@@ -263,12 +251,30 @@
                         </div>
                         
                     </div>
+                    <div class="form-row form-group">
+                        <div class="col" >
+                            <label for="exampleInputEmail1">Giới tính:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" formControlName="gioitinh"  [value]="1" checked>
+                                <label class="form-check-label">
+                                  Nam 
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" formControlName="gioitinh"  [value]="0">
+                                <label class="form-check-label">
+                                  Nữ
+                                </label>
+                              </div>
+                        </div>
+                        
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                     class="btn btn-default">Close</button>
-                <button type="button" (click)="add()" [disabled]="!formAdd.valid" class="btn btn-primary">Thêm mới</button>
+                <button type="button" (click)="add()" [disabled]="!formAdd.valid" data-dismiss="modal" class="btn btn-primary">Thêm mới</button>
                 <!--  -->
             </div>
         </div>
@@ -286,7 +292,7 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="formEdit">
-                    <input type="number" formControlName="gioitinh">
+                 
                     <div class="form-row form-group">
                         <div class="col">
                             <label for="exampleInputEmail1">Mã sinh viên :</label>
@@ -307,7 +313,7 @@
                         </div>
                         <div class="col">
                             <label for="exampleInputEmail1">Ngày sinh :</label>
-                            <input type="datetime" class="form-control" formControlName="ngaysinh">
+                            <input type="date" class="form-control" formControlName="ngaysinh">
                             <span class="text-danger" role="alert"
                                 *ngIf="formEdit.controls.ngaysinh?.errors?.required && formEdit.controls.ngaysinh?.touched">
                                 Ngày sinh không được để trống!
@@ -402,13 +408,13 @@
                         <div class="col" >
                             <label for="exampleInputEmail1">Giới tính:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" formControlName="gioitinh"  [value]="true" checked>
+                                <input class="form-check-input" type="radio" formControlName="gioitinh"  [value]="1" checked>
                                 <label class="form-check-label">
                                   Nam 
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" formControlName="gioitinh"  [value]="false">
+                                <input class="form-check-input" type="radio" formControlName="gioitinh"  [value]="0">
                                 <label class="form-check-label">
                                   Nữ
                                 </label>
@@ -421,7 +427,7 @@
             <div class="modal-footer">
                 <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                     class="btn btn-default">Close</button>
-                <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+                <button type="button" (click)="update()" data-dismiss="modal" class="btn btn-primary">Update</button>
                 <!--  -->
             </div>
         </div>

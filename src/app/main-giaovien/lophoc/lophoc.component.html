@@ -131,9 +131,8 @@
             <div class="modal-footer">
                 <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
                     class="btn btn-default">Close</button>
-                <button type="button" (click)="ThemlopGiangDay()" [disabled]="!formAdd.valid"
+                <button type="button" (click)="ThemlopGiangDay()" data-dismiss="modal" [disabled]="!formAdd.valid"
                     class="btn btn-primary">Thêm mới</button>
-                   
             </div>
         </div>
     </div>
