@@ -1,0 +1,45 @@
+
+  <div [class]="classNameLayout">
+    <app-menu (staticMenu)="onStaticMenu($event)"></app-menu>
+    <div [ngClass]="{ 'layout-main': true, 'layout-overflow-hidden': loading }">
+      <div class="layout-topbar">
+        <div class="layout-topbar-wrapper">
+          <div class="layout-topbar-left">
+          </div>
+          <div class="layout-topbar-right fadeInDown">
+            <ul class="layout-topbar-actions">
+              <li class="topbar-item">
+                <a href="#" (click)="$event.preventDefault()"><i class="topbar-icon pi pi-bell"></i></a>
+                
+              </li>
+              <li class="topbar-item profile-item">
+                <a href="#" (click)="$event.preventDefault()">
+                  <span class="profile-image-wrapper">|</span>
+                  <span  (click)="op.toggle($event)" class="profile-info-wrapper"><h3> {{ 'ADMIN'}}</h3></span>
+                </a>
+                <p-overlayPanel #op [style]="{ width: '200px' }">
+                  <ng-template pTemplate>
+                    <div class="pointer" ><a href="javascript:void(0)">Logout</a></div>
+                  </ng-template>
+                </p-overlayPanel>
+               
+              </li>
+         
+            </ul>
+           
+          </div>
+        </div>
+      </div>
+      
+      <!-- <app-rightpanel></app-rightpanel> -->
+      <app-breadcrumb></app-breadcrumb>
+      <!-- <div class="layout-mask" [ngClass]="{'layout-mask-active': menuActive}" (click)="onMaskClick()"></div> -->
+      <div class="layout-content">
+        <app-loading *ngIf="loading"></app-loading>
+        <router-outlet></router-outlet>
+      </div>
+      <!-- <app-footer></app-footer> -->
+      <!-- <app-config></app-config> -->
+    </div>
+  </div>
+  <p-toast></p-toast> 
