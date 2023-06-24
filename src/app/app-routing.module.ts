@@ -11,8 +11,9 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./main/main.module').then((m) => m.MainModule), canActivate: [AuthGuard]
+    loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule)
   },
+  
   {
     path: 'giaovien',
     loadChildren: () => import('./main-giaovien/maingiaovien.module').then((m) => m.MaingiaovienModule), canActivate: [GiaovienGuard]

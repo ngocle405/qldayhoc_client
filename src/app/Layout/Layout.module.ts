@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LayoutAdminComponent } from './layout-admin/layout-admin.component';
 import { LayoutSinhvienComponent } from './layout-sinhvien/layout-sinhvien.component';
 //import { LayoutGiaovienComponent } from './layout-giaovien/layout-giaovien.component';
 

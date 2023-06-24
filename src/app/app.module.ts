@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginSinhvienComponent } from './login/login-sinhvien/login-sinhvien.component';   
 import { CommonComponent } from './lms/common/common.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { CommonComponent } from './lms/common/common.component';
     ReactiveFormsModule,
    
     BrowserAnimationsModule,
+    
  
     
   //  RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
