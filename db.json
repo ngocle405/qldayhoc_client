@@ -1,0 +1,70 @@
+{
+  "class": [
+    {
+      "code": "101181",
+      "name": "tk 16.3",
+      "id": 4,
+      "status": true
+    },
+    {
+      "code": "101182",
+      "name": "tk 16.2",
+      "status": true,
+      "id": 5
+    },
+    {
+      "code": "101189",
+      "name": "tk 16.9",
+      "status": true,
+      "id": 6
+    },
+    {
+      "code": "101184",
+      "name": "tk 16.5",
+      "status": true,
+      "id": 7
+    },
+    {
+      "code": "101187",
+      "name": "tk 16.7",
+      "status": true,
+      "id": 8
+    },
+    {
+      "code": "101171",
+      "name": "tk 17.1",
+      "status": true,
+      "id": 9
+    },
+    {
+      "code": "101186",
+      "name": "tk 16.6",
+      "status": true,
+      "id": 10
+    },
+    {
+      "code": "101172",
+      "name": "tk 17.2",
+      "status": true,
+      "id": 11
+    },
+    {
+      "code": "101173",
+      "name": "tk 17.4",
+      "status": true,
+      "id": 12
+    },
+    {
+      "code": "101174",
+      "name": "tk 17.4",
+      "status": true,
+      "id": 13
+    },
+    {
+      "code": "101175",
+      "name": "tk 17.5",
+      "status": true,
+      "id": 14
+    }
+  ]
+}

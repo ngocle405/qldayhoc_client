@@ -1,0 +1,68 @@
+<div class="card">
+    <h3 class="title uppercase">danh sách giáo viên</h3>
+    <div class="grid">
+      <div class="col-3">
+        <span class="p-float-label">
+          <input inputId="name" type="text" class="p-inputtext-sm" [(ngModel)]="params.name" pInputText />
+          <label for="name">Fullname </label>
+        </span>
+      </div>
+      <div class="col-3">
+        <span class="p-float-label">
+          <input inputId="name" type="text" class="p-inputtext-sm" [(ngModel)]="params.userName" pInputText />
+          <label for="name">Username</label>
+        </span>
+      </div>
+  
+      
+    </div>
+    <p-toolbar styleClass="px-0 pt-0">
+      <div class="p-toolbar-group-left">
+        <div class="p-field">
+          <button pButton (click)="search()" icon="pi pi-search" pRipple type="button" label="Tìm kiếm"></button>
+          <p-button (click)="onReset()" icon="pi pi-replay" class="ml-2"></p-button>
+        </div>
+      </div>
+      <div class="p-toolbar-group-right">
+        <button pButton (click)="viewCreate()" label="New" icon="pi pi-plus" class="mr-2"></button>
+      </div>
+    </p-toolbar>
+    <p-table [value]="dataTable.content" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>STT</th>
+          <th>Username</th>
+          <th>account name</th>
+          <th style="width: 100px" alignFrozen="right" pFrozenColumn>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-i="rowIndex">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.username }}</td>
+          <td>{{ item.name }}</td>
+      
+          <td style="width: 100px" alignFrozen="right" pFrozenColumn>
+            <span class="pointer p-mr-2" (click)="viewDetail(item.teacherId)">
+              <em class="las la-eye"></em>
+            </span>
+            <span class="pointer p-mr-2" (click)="viewEdit(item.teacherId)">
+              <em class="las la-pen"></em>
+            </span>
+            <span class="pointer" (click)="deleteItem(item.teacherId)">
+              <em class="las la-trash-alt"></em>
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  
+    <p-paginator
+      [showCurrentPageReport]="true"
+      [rows]="dataTable!.size"
+      [totalRecords]="dataTable!.totalElements"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      (onPageChange)="pageChange($event)"
+    ></p-paginator>
+  </div>
+  
