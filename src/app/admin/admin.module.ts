@@ -6,10 +6,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AdminRoutingModule } from './admin.routing';
 import { ClassComponent } from './class/class.component';
 import { AccountComponent } from './account/account.component';
+import { TermComponent } from './term/term.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, ClassComponent, AccountComponent],
+  declarations: [AdminComponent, ClassComponent, AccountComponent, TermComponent],
   imports: [
     CommonModule,
     SharedModule,

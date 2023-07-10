@@ -66,5 +66,15 @@
       "status": true,
       "id": 14
     }
+  ],
+  "term":[
+    {
+      "id":1,
+      "code":"HP01",
+      "name":"lt",
+      "semester":1,
+      "numOfCredit":3
+    }
   ]
+
 }
