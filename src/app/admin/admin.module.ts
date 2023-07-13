@@ -7,10 +7,11 @@ import { AdminRoutingModule } from './admin.routing';
 import { ClassComponent } from './class/class.component';
 import { AccountComponent } from './account/account.component';
 import { TermComponent } from './term/term.component';
+import { PeriodComponent } from './period/period.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, ClassComponent, AccountComponent, TermComponent],
+  declarations: [AdminComponent, ClassComponent, AccountComponent, TermComponent, PeriodComponent],
   imports: [
     CommonModule,
     SharedModule,

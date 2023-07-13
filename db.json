@@ -67,14 +67,43 @@
       "id": 14
     }
   ],
-  "term":[
+  "term": [
     {
-      "id":1,
-      "code":"HP01",
-      "name":"lt",
-      "semester":1,
-      "numOfCredit":3
+      "id": 1,
+      "code": "HP01",
+      "name": "lt",
+      "semester": 1,
+      "numOfCredit": 3
+    }
+  ],
+  "lesson": [
+    {
+      "id": 1,
+      "teacherId": 1,
+      "termId": 1,
+      "classId": 1,
+      "schoolYear": "2020-2021",
+      "period": "",
+      "type": ""
+    }
+  ],
+  "period": [
+    {
+      "id": 1,
+      "code": "T1",
+      "name": "Tiết 2",
+      "isEdit": false
+    },
+    {
+      "code": "s",
+      "name": "ngoc vip",
+      "id": 2,
+      "isEdit": false
+    },
+    {
+      "code": "qưe",
+      "name": "qưe",
+      "id": 3
     }
   ]
-
 }

@@ -142,7 +142,6 @@ export class BaseTableComponent implements OnDestroy {
     this.search();
   }
   viewEdit(item: any) {
-
     this.model = JSON.parse(JSON.stringify(item));
   }
 
@@ -192,7 +191,7 @@ export class BaseTableComponent implements OnDestroy {
     })
   }
   closeForm() {
-    this.form.resetForm();
+    this.form?.resetForm();
     this.modal.nativeElement.querySelector('button.close').click();
   }
 

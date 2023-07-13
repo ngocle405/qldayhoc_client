@@ -1,0 +1,139 @@
+<div class="card">
+    <div class="grid">
+        <div class="col-4">
+            <span class="p-float-label">
+                <input inputId="name" type="text" class="p-inputtext-sm" pInputText />
+                <label for="name">Tiêu đề</label>
+            </span>
+        </div>
+        <!-- <div class="col-4">
+        <span class="p-float-label">
+          <p-dropdown
+          [options]="stateData!.teacherId"
+    
+            class="p-inputtext-sm"
+            optionLabel="teacherName"
+            optionValue="teacherId"
+            [autoDisplayFirst]="false"
+          >
+          </p-dropdown>
+          <label for="icon">Tên giáo viên</label>
+        </span>
+      </div> -->
+
+        <div class="col-4">
+            <span class="p-float-label">
+                <!-- <p-dropdown
+            [options]="stateData.listStatus"
+            class="p-inputtext-sm"
+            [(ngModel)]="params.status"
+            optionLabel="name"
+            optionValue="value"
+            [autoDisplayFirst]="false"
+          >
+          </p-dropdown> -->
+                <label for="icon">Trạng thái</label>
+            </span>
+        </div>
+    </div>
+    <p-toolbar styleClass="px-0 pt-0">
+        <div class="p-toolbar-group-left">
+            <div class="p-field">
+                <button pButton (click)="search(true)" icon="pi pi-search" pRipple type="button"
+                    label="Tìm kiếm"></button>
+                <button pButton pRipple label="Export" icon="pi pi-download" class="ml-2"></button>
+                <p-button icon="pi pi-replay" class="ml-2"></p-button>
+            </div>
+        </div>
+        <div class="p-toolbar-group-right">
+            <button pButton type="button"  label="Delete" 
+            class="mr-2"></button>
+            <button pButton type="button" (click)="open()" label="Edit" data-toggle="modal" data-target="#exampleModal" icon="pi pi-plus"
+                ></button>
+        </div>
+    </p-toolbar>
+    <p-table [value]="dataTable.content" responsiveLayout="scroll" [(selection)]="selectedItem">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>STT</th>
+                <th>Mã tiết</th>
+                <th>Tên tiết</th>
+                <th style="width: 100px" alignFrozen="right" pFrozenColumn>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-i="rowIndex">
+            <tr>
+                <td>
+                    <p-checkbox name="id" [value]="item.id" (onChange)="select($event)" ></p-checkbox>
+                </td>
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.name }}</td>
+                <td style="width: 100px" alignFrozen="right" pFrozenColumn>
+          
+                    <!-- <span type="button" class="pointer mr-2" data-toggle="modal" data-target="#exampleModal"  (click)="viewEdit(item)">
+                        <i class="pi pi-pencil"></i>
+                    </span> -->
+                    <span class="pointer" (click)="deleteItem(item.id)">
+                      <i class="pi pi-trash"></i>
+                    </span>
+                  </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-paginator [showCurrentPageReport]="true" [rows]="dataTable!.size" [totalRecords]="length"
+        [rowsPerPageOptions]="[10, 20, 30]" (onPageChange)="pageChange($event)"></p-paginator>
+</div>
+<div class="modal fade" #modal id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm học phần </h5>
+                <button type="button" (click)="closeForm()" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+
+                    <div class="mt-2 p-dialog-body grid p-fluid">
+
+                        <ng-container *ngFor="let item of array;let i= index">
+                            <div class="col-5">
+                                <div class="p-field">
+                                    <span class="p-float-label">
+                                        <input type="text" class="p-inputtext-sm" [disabled]="item.isEdit" pInputText  [(ngModel)]="item.code"
+                                            name="{{'code_'+i}}" />
+                                        <label for="inputtext">Mã tiết*</label>
+                                    </span>
+                                </div>
+                            </div>
+    
+                            <div class="col-5">
+                                <div class="p-field">
+                                    <span class="p-float-label">
+                                        <input p-dialog-body type="text" name="{{'name_'+i}}"  [disabled]="item.isEdit" [(ngModel)]="item.name"
+                                            class="p-inputtext-sm" pInputText />
+                                        <label for="inputtext">Tên tiết*</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <button *ngIf="item.isEdit" type="button" class="pointer mr-2 btn btn-primary btn-sm"  (click)="viewEdit(item)">    <i class="pi pi-pencil"></i> </button>
+                                <button *ngIf="!item.isEdit" type="button" class="pointer mr-2 btn btn-success btn-sm"  (click)="saveData(item)">    <i class="pi pi-save"></i> </button>
+                            </div>
+                        </ng-container>
+                        <div class="col-12">
+                            <div class="p-field">
+                              <button type="button" (click)="addLine()" class="btn btn-primary btn-sm">Thêm dòng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

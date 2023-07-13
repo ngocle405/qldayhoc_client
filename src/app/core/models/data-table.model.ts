@@ -4,7 +4,7 @@ export interface DataTable {
   currentPage: number;
   size: number;
   limit: number;
-  content: [];
+  content:any[];
   totalRecords: number;
   // first:number;
   //status:boolean| string;

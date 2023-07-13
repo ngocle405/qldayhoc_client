@@ -15,10 +15,8 @@ export class BaseService {
   getState(): Observable<any> {
     return of(this.state);
   }
-  get(href: string = '', params: any = {}) {
-    return this.http.get(this.baseURL + `${href}`, {
-      params: params,
-    });
+  get() {
+    return this.http.get(this.baseURL)
   }
   getLength() {
     return this.http

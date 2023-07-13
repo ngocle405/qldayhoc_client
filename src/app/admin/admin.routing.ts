@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { ClassComponent } from './class/class.component';
 import { AccountComponent } from './account/account.component';
 import { TermComponent } from './term/term.component';
+import { PeriodComponent } from './period/period.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'account',
         component:AccountComponent
+      },
+      {
+        path: 'period',
+        component:PeriodComponent
       },
       
       // {

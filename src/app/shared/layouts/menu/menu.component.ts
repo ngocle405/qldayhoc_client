@@ -121,9 +121,9 @@ export class AppMenuComponent implements OnInit {
           {
             id: uuIdv4(),
             path: '[4]',
-            label: 'Quản lý loại tin tức',
+            label: 'Quản lý tiết học',
             icon: 'pi-sign-in',
-            routerLink: '/admin/administration/newcategory',
+            routerLink: '/admin/period',
             active: false,
           },
           {
