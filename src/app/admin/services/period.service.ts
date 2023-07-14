@@ -15,10 +15,7 @@ export class PeriodService extends BaseService {
   updateItems(items: any[]): Observable<any[]> {
     return this.http.post<any[]>(environment.endpoint_url + '/period', items);
   }
-  deleteSelected(params?: any) {
-    const newParam: any = cleanDataTable(params);
-    return this.http.delete(`${this.baseUrl}`, {
-      params: { ...newParam },
-    });
+  deleteSelected(data: any) {
+    return this.http.post<any[]>(`${this.baseUrl}`, data);
   }
 }

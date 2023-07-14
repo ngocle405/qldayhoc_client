@@ -92,7 +92,14 @@
       "id": 1,
       "code": "T1",
       "name": "Tiết 2",
-      "isEdit": false
+      "isEdit": false,
+      "commons": [
+        {
+          "id": 1,
+          "name": "vip",
+          "code": "101111"
+        }
+      ]
     },
     {
       "code": "s",
@@ -104,6 +111,25 @@
       "code": "qưe",
       "name": "qưe",
       "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "code": "123456sxxx",
+      "name": "test vipxx",
+      "isEdit": true,
+      "array": [
+        {
+          "code": "123",
+          "name": "12312áda"
+        },
+        {
+          "code": "xxxx",
+          "name": "xxxx"
+        }
+      ],
+      "id": 5
     }
   ]
 }

@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="p-toolbar-group-right">
-            <button pButton type="button"  label="Delete" 
+            <button pButton type="button" (click)="removeSelect()"  label="Delete" 
             class="mr-2"></button>
             <button pButton type="button" (click)="open()" label="Edit" data-toggle="modal" data-target="#exampleModal" icon="pi pi-plus"
                 ></button>
@@ -67,16 +67,16 @@
         <ng-template pTemplate="body" let-item let-i="rowIndex">
             <tr>
                 <td>
-                    <p-checkbox name="id" [value]="item.id" (onChange)="select($event)" ></p-checkbox>
+                    <p-tableCheckbox  [value]="item"  ></p-tableCheckbox>
                 </td>
                 <td>{{ i + 1 }}</td>
                 <td>{{ item.code }}</td>
                 <td>{{ item.name }}</td>
                 <td style="width: 100px" alignFrozen="right" pFrozenColumn>
           
-                    <!-- <span type="button" class="pointer mr-2" data-toggle="modal" data-target="#exampleModal"  (click)="viewEdit(item)">
+                    <span type="button" class="pointer mr-2" data-toggle="modal" data-target="#exampleModal"  (click)="viewEdit(item)">
                         <i class="pi pi-pencil"></i>
-                    </span> -->
+                    </span>
                     <span class="pointer" (click)="deleteItem(item.id)">
                       <i class="pi pi-trash"></i>
                     </span>
@@ -102,35 +102,69 @@
 
                     <div class="mt-2 p-dialog-body grid p-fluid">
 
-                        <ng-container *ngFor="let item of array;let i= index">
-                            <div class="col-5">
+                        <ng-container >
+                            <div class="col-6">
                                 <div class="p-field">
                                     <span class="p-float-label">
-                                        <input type="text" class="p-inputtext-sm" [disabled]="item.isEdit" pInputText  [(ngModel)]="item.code"
-                                            name="{{'code_'+i}}" />
+                                        <input type="text" class="p-inputtext-sm"  pInputText  [(ngModel)]="model.code"
+                                            name="code" />
                                         <label for="inputtext">Mã tiết*</label>
                                     </span>
                                 </div>
                             </div>
     
-                            <div class="col-5">
+                            <div class="col-6">
                                 <div class="p-field">
                                     <span class="p-float-label">
-                                        <input p-dialog-body type="text" name="{{'name_'+i}}"  [disabled]="item.isEdit" [(ngModel)]="item.name"
+                                        <input p-dialog-body type="text" name="name"  [(ngModel)]="model.name"
                                             class="p-inputtext-sm" pInputText />
                                         <label for="inputtext">Tên tiết*</label>
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <button *ngIf="item.isEdit" type="button" class="pointer mr-2 btn btn-primary btn-sm"  (click)="viewEdit(item)">    <i class="pi pi-pencil"></i> </button>
-                                <button *ngIf="!item.isEdit" type="button" class="pointer mr-2 btn btn-success btn-sm"  (click)="saveData(item)">    <i class="pi pi-save"></i> </button>
-                            </div>
+                     
                         </ng-container>
                         <div class="col-12">
-                            <div class="p-field">
-                              <button type="button" (click)="addLine()" class="btn btn-primary btn-sm">Thêm dòng</button>
+                            <p-table [value]="model.array" responsiveLayout="scroll">
+                              <ng-template pTemplate="header">
+                                <tr>
+                                  <th scope="col" >code</th>
+                                  <th scope="col" >name</th>
+                            
+                                  <th  alignFrozen="right" pFrozenColumn scope="col" style="width: 100px">
+                                    action
+                                  </th>
+                                </tr>
+                              </ng-template>
+                              <ng-template let-item let-i="rowIndex" pTemplate="body">
+                                <tr >
+                                  <td >
+                                    <input type="text" [(ngModel)]="item.code" [name]="'code_'+i">
+                                  </td>
+                                  <td >
+                                    <input type="text" [(ngModel)]="item.name" [name]="'name_'+i">
+                                  </td>
+                                 
+                                  <td  alignFrozen="right" pFrozenColumn style="width: 100px">
+                                    <span (click)="deleteItem(item)" class="pointer">
+                                      <em class="las la-trash-alt"></em>
+                                    </span>
+                                  </td>
+                                </tr>
+                              </ng-template>
+                            </p-table>
+                            <br />
+                            <div  class="mt-2">
+                              <button (click)="addLine()" class="mr-2" icon="pi pi-plus" pButton></button>
                             </div>
+                          </div>
+                        <div class="col-12">
+                            <div class="p-field">
+                              <!-- <button type="button" (click)="addLine()" class="btn btn-primary btn-sm">Thêm dòng</button> -->
+                              <button type="button" (click)="save()" class="btn btn-primary btn-sm">Add</button>
+                            </div>
+                       
+                              
                         </div>
                     </div>
                 </div>

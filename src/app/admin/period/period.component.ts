@@ -16,39 +16,49 @@ export class PeriodComponent extends BaseTableComponent implements OnInit {
     super(injector, service);
   }
   selectedItem: any[] = [];
-  array: any = [];
-  model = {};
+  model: any = {
+    code: '',
+    name: '',
+    array: [],
+  };
   ngOnInit(): void {}
-  getAll() {
-    this.service.get().subscribe({
-      next: (data: any) => {
-        this.array = data.map((x: any) => {
-          x.isEdit = true;
-          return x;
-        });
-      },
-    });
-  }
+  // getAll() {
+  //   this.service.get().subscribe({
+  //     next: (data: any) => {
+  //       this.array = data.map((x: any) => {
+  //         x.isEdit = true;
+  //         return x;
+  //       });
+  //     },
+  //   });
+  // }
   addLine() {
-    this.array?.push({
+    this.model?.array?.push({
       code: null,
       name: null,
     });
   }
   override viewEdit(item: any) {
-    item.isEdit = false;
+    this.model = JSON.parse(JSON.stringify(item));
+    this.model.array = item.array;
   }
 
   open() {
-    this.getAll();
+    //this.getAll();
   }
   saveData(item: any) {
+    const data = {
+      code: this.model.code,
+      name: this.model.name,
+      isEdit: true,
+      array: this.model.array,
+    };
     //  const data =this.array.filter((x:any)=> x.id !== element.id)
     if (item.id) {
       this.service.update(item.id, item).subscribe({
         next: () => {
           this.messageService?.success('Cập nhật thành công');
-          this.getAll();
+          // this.getAll();
           this.search();
         },
       });
@@ -56,23 +66,51 @@ export class PeriodComponent extends BaseTableComponent implements OnInit {
       this.service.create(item).subscribe({
         next: () => {
           this.search();
-          this.getAll();
+          // this.getAll();
           this.messageService?.success('Cập nhật thành công');
         },
       });
     }
   }
+  override save() {
+    const data = {
+      code: this.model.code,
+      name: this.model.name,
+      isEdit: true,
+      array: this.model.array,
+    };
+    //  const data =this.array.filter((x:any)=> x.id !== element.id)
+    if (this.model.id !== null) {
+      this.service.update(this.model.id,data).subscribe({
+        next: () => {
+          this.messageService?.success('Cập nhật thành công');
+          // this.getAll();
+          this.search();
+        },
+      });
+    } else {
+      this.service.create(data).subscribe({
+        next: () => {
+          this.messageService?.success('Cập nhật thành công');
+          // this.getAll();
+          this.search();
+        },
+      });
+    }
+  }
   idSelect: number = 0;
-  select(event:any) {
-   this.idSelect =+event.checked.toString()
+  select(event: any) {
+    this.idSelect = +event.checked.toString();
     console.log(event.checked.toString());
   }
-  // removeSelect() {
-  //   this.ser.deleteSelected({...this.idSelect}).subscribe({
-  //     next: (value) => {
-  //       console.log('success');
-  //       this.search();
-  //     },
-  //   });
-  // }
+  removeSelect() {
+    console.log(this.selectedItem);
+
+    this.ser.deleteSelected({ ...this.selectedItem }).subscribe({
+      next: (value) => {
+        console.log('success');
+        this.search();
+      },
+    });
+  }
 }

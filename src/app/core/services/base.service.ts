@@ -49,7 +49,7 @@ export class BaseService {
   updateAction(id: string, data: any): Observable<string> {
     return this.http.put<string>(`${this.baseUrl}/${id}`, data);
   }
-  update(id:number,data: any): Observable<string> {
+  update(id:number|string,data: any): Observable<string> {
     return this.http.put<string>(`${this.baseUrl}/${id}`, data);
   }
   delete(id: string | number): Observable<void> {
