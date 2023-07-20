@@ -1,10 +1,28 @@
 {
   "class": [
     {
-      "code": "101181",
-      "name": "tk 16.3",
+      "code": "123456",
+      "name": "ngoc",
       "id": 4,
-      "status": true
+      "status": true,
+      "students": [
+        {
+          "stt": 0,
+          "code": "123",
+          "name": "123",
+          "bith": 47062800000,
+          "phone": "123",
+          "gender": true
+        },
+        {
+          "stt": 1,
+          "code": null,
+          "name": null,
+          "bith": 0,
+          "phone": null,
+          "gender": null
+        }
+      ]
     },
     {
       "code": "101182",
@@ -65,6 +83,38 @@
       "name": "tk 17.5",
       "status": true,
       "id": 14
+    },
+    {
+      "code": "123456",
+      "name": "kl;",
+      "status": true,
+      "students": [
+        {
+          "stt": null,
+          "code": "123",
+          "name": "123",
+          "bith": null,
+          "phone": "212231",
+          "gender": "1"
+        },
+        {
+          "stt": null,
+          "code": null,
+          "name": null,
+          "bith": null,
+          "phone": null,
+          "gender": null
+        },
+        {
+          "stt": null,
+          "code": null,
+          "name": null,
+          "bith": null,
+          "phone": null,
+          "gender": null
+        }
+      ],
+      "id": 15
     }
   ],
   "term": [
@@ -89,17 +139,10 @@
   ],
   "period": [
     {
-      "id": 1,
       "code": "T1",
       "name": "Tiết 2",
-      "isEdit": false,
-      "commons": [
-        {
-          "id": 1,
-          "name": "vip",
-          "code": "101111"
-        }
-      ]
+      "isEdit": true,
+      "id": 1
     },
     {
       "code": "s",
@@ -111,25 +154,6 @@
       "code": "qưe",
       "name": "qưe",
       "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "code": "123456sxxx",
-      "name": "test vipxx",
-      "isEdit": true,
-      "array": [
-        {
-          "code": "123",
-          "name": "12312áda"
-        },
-        {
-          "code": "xxxx",
-          "name": "xxxx"
-        }
-      ],
-      "id": 5
     }
   ]
 }

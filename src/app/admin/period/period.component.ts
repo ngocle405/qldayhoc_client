@@ -105,8 +105,8 @@ export class PeriodComponent extends BaseTableComponent implements OnInit {
   }
   removeSelect() {
     console.log(this.selectedItem);
-
-    this.ser.deleteSelected({ ...this.selectedItem }).subscribe({
+    
+    this.ser.deleteSelected(this.selectedItem ).subscribe({
       next: (value) => {
         console.log('success');
         this.search();

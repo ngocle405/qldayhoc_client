@@ -1,4 +1,10 @@
-import { Component, Injector, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Injector,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { BaseTableComponent } from 'src/app/shared/components/base-table.component';
 import * as _ from 'lodash';
 import { ClassService } from '../services/class.service';
@@ -11,9 +17,54 @@ export class ClassComponent extends BaseTableComponent implements OnInit {
   constructor(inject: Injector, private serivce: ClassService) {
     super(inject, serivce);
   }
-  model = { id: undefined, code: undefined, name: undefined, status: true }
+  model: any = {
+    id: undefined,
+    code: undefined,
+    name: undefined,
+    status: true,
+    students: [],
+  };
 
-  ngOnInit(): void {
+  gender = [
+    {
+      code: true,
+      name: 'Nam',
+    },
+    {
+      code: false,
+      name: 'Nữ',
+    },
+  ];
+
+  ngOnInit(): void {}
+  addNewFormChildren() {
+    const item = {
+      stt: null,
+      code: 'SV-',
+      name: null,
+      bith: null,
+      phone: null,
+      gender: true,
+    };
+    this.model.students?.push(item);
   }
-
+  override viewEdit(item: any) {
+    this.model = JSON.parse(JSON.stringify(item));
+    this.model.students = item.students || [];
+    this.model.students.forEach((x:any)=>{
+      x.bith = new Date(x.bith);
+      return x;
+    })
+  }
+  override save() {
+    this.model.students.forEach((x: any, i: number) => {
+      x.bith = new Date(x.bith).getTime();
+      x.stt = i;
+    });
+    if (this.model.id !== undefined) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
 }

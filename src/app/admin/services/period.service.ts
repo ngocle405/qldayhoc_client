@@ -16,6 +16,6 @@ export class PeriodService extends BaseService {
     return this.http.post<any[]>(environment.endpoint_url + '/period', items);
   }
   deleteSelected(data: any) {
-    return this.http.post<any[]>(`${this.baseUrl}`, data);
+    return this.http.post<any[]>(`${this.baseUrl}/range`, data);
   }
 }

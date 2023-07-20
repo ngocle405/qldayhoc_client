@@ -1,12 +1,12 @@
 <div class="card">
-    <div class="grid">
-      <div class="col-4">
-        <span class="p-float-label">
-          <input inputId="name" type="text" class="p-inputtext-sm" pInputText />
-          <label for="name">Tiêu đề</label>
-        </span>
-      </div>
-      <!-- <div class="col-4">
+  <div class="grid">
+    <div class="col-4">
+      <span class="p-float-label">
+        <input inputId="name" type="text" class="p-inputtext-sm" pInputText />
+        <label for="name">Tiêu đề</label>
+      </span>
+    </div>
+    <!-- <div class="col-4">
         <span class="p-float-label">
           <p-dropdown
           [options]="stateData!.teacherId"
@@ -20,10 +20,10 @@
           <label for="icon">Tên giáo viên</label>
         </span>
       </div> -->
-  
-      <div class="col-4">
-        <span class="p-float-label">
-          <!-- <p-dropdown
+
+    <div class="col-4">
+      <span class="p-float-label">
+        <!-- <p-dropdown
             [options]="stateData.listStatus"
             class="p-inputtext-sm"
             [(ngModel)]="params.status"
@@ -32,65 +32,62 @@
             [autoDisplayFirst]="false"
           >
           </p-dropdown> -->
-          <label for="icon">Trạng thái</label>
-        </span>
+        <label for="icon">Trạng thái</label>
+      </span>
+    </div>
+  </div>
+  <p-toolbar styleClass="px-0 pt-0">
+    <div class="p-toolbar-group-left">
+      <div class="p-field">
+        <button pButton (click)="search(true)" icon="pi pi-search" pRipple type="button" label="Tìm kiếm"></button>
+        <button pButton pRipple label="Export" icon="pi pi-download" class="ml-2"></button>
+        <p-button icon="pi pi-replay" class="ml-2"></p-button>
       </div>
     </div>
-    <p-toolbar styleClass="px-0 pt-0">
-      <div class="p-toolbar-group-left">
-        <div class="p-field">
-          <button pButton (click)="search(true)" icon="pi pi-search" pRipple type="button" label="Tìm kiếm"></button>
-          <button  pButton pRipple label="Export" icon="pi pi-download" class="ml-2"></button>
-          <p-button  icon="pi pi-replay" class="ml-2"></p-button>
-        </div>
-      </div>
-      <div class="p-toolbar-group-right">
-        <button pButton type="button" label="Thêm lớp" data-toggle="modal" data-target="#exampleModal" icon="pi pi-plus" class="p-mr-2"></button>
-      </div>
-    </p-toolbar>
-    <p-table [value]="dataTable.content" responsiveLayout="scroll">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>STT</th>
-          <th>Mã lớp</th>
-          <th>Tên lớp</th>
-          <th style="width: 100px" alignFrozen="right" pFrozenColumn>Action</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-item let-i="rowIndex">
-        <tr>
-          <td>{{ i + 1 }}</td>
-          <td>{{ item.code }}</td>
-          <td>{{ item.name }}</td>
-       
-          <td style="width: 100px" alignFrozen="right" pFrozenColumn>
-          
-            <!-- <span type="button" class="pointer mr-2" data-toggle="modal" data-target="#exampleModal"  (click)="viewEdit(item)">
-                <i class="pi pi-pencil"></i>
-            </span> -->
-            <span class="pointer" (click)="deleteItem(item.id)">
-              <i class="pi pi-trash"></i>
-            </span>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  
-    <p-paginator
-      [showCurrentPageReport]="true"
-      [rows]="dataTable!.size"
-      [totalRecords]="length"
-      [rowsPerPageOptions]="[10, 20, 30]"
-      (onPageChange)="pageChange($event)"
-    ></p-paginator>
-  </div>
-  <div class="modal fade"  #modal id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
+    <div class="p-toolbar-group-right">
+      <button pButton type="button" label="Thêm lớp" data-toggle="modal" data-target="#exampleModal" icon="pi pi-plus"
+        class="p-mr-2"></button>
+    </div>
+  </p-toolbar>
+  <p-table [value]="dataTable.content" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>STT</th>
+        <th>Mã lớp</th>
+        <th>Tên lớp</th>
+        <th style="width: 100px" alignFrozen="right" pFrozenColumn>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.name }}</td>
+
+        <td style="width: 100px" alignFrozen="right" pFrozenColumn>
+
+          <span type="button" class="pointer mr-2" data-toggle="modal" data-target="#exampleModal"
+            (click)="viewEdit(item)">
+            <i class="pi pi-pencil"></i>
+          </span>
+          <span class="pointer" (click)="deleteItem(item.id)">
+            <i class="pi pi-trash"></i>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-paginator [showCurrentPageReport]="true" [rows]="dataTable!.size" [totalRecords]="length"
+    [rowsPerPageOptions]="[10, 20, 30]" (onPageChange)="pageChange($event)"></p-paginator>
+</div>
+<div class="modal fade bd-example-modal-lg" #modal id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Thêm lớp </h5>
-        <button type="button" (click)="closeForm()"  class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" (click)="closeForm()" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -103,8 +100,7 @@
             <div class="col-6">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input type="tex" class="p-inputtext-sm" pInputText [(ngModel)]="model.code"
-                    name="code" />
+                  <input type="tex" class="p-inputtext-sm" pInputText [(ngModel)]="model.code" name="code" />
                   <label for="inputtext">Mã lớp*</label>
                 </span>
               </div>
@@ -113,14 +109,64 @@
             <div class="col-6">
               <div class="p-field">
                 <span class="p-float-label">
-                  <input p-dialog-body type="text" name="name"  [(ngModel)]="model.name" class="p-inputtext-sm"
+                  <input p-dialog-body type="text" name="name" [(ngModel)]="model.name" class="p-inputtext-sm"
                     pInputText />
                   <label for="inputtext">Tên lớp*</label>
                 </span>
               </div>
             </div>
-            
-            
+            <div class="col-12">
+              <p-table [value]="model.students" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <!-- <th scope="col" >STT</th> -->
+                    <th scope="col">Mã sv</th>
+                    <th scope="col">Họ tên</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Điện thoại</th>
+                  </tr>
+                </ng-template>
+                <ng-template let-item let-i="rowIndex" pTemplate="body">
+                  <tr>
+                    <input type="hidden" name="stt_{{i}}" [(ngModel)]="item.stt" class="p-inputtext-sm" pInputText />
+
+                    <td>
+                      <input type="text" name="code_{{i}}" [(ngModel)]="item.code" class="p-inputtext-sm" pInputText />
+                    </td>
+                    <td>
+                      <input type="text" name="name_{{i}}" [(ngModel)]="item.name" class="p-inputtext-sm" pInputText />
+                    </td>
+                    <td>
+                      <p-dropdown [options]="gender" name="gender_{{i}}" class="p-inputtext-sm" optionLabel="name"
+                        optionValue="code" [autoDisplayFirst]="false" [(ngModel)]="item.gender">
+                      </p-dropdown>
+                    </td>
+                    <td>
+                      <p-calendar [readonlyInput]="true" [showIcon]="true" appendTo="body" dateFormat="dd/mm/yy"
+                        inputId="icon" name="bith_{{i}}" [(ngModel)]="item.bith" class="p-inputtext-sm">
+                      </p-calendar>
+
+                    </td>
+                    <td>
+                      <input type="text" name="phone_{{i}}" [(ngModel)]="item.phone" class="p-inputtext-sm"
+                        pInputText />
+                    </td>
+                    <td alignFrozen="right" pFrozenColumn>
+                      <span (click)="deleteItem(item)" class="pointer">
+                        <i class="pi pi-trash"></i>
+                      </span>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              <br />
+              <div class="mt-2">
+                <button type="button" (click)="addNewFormChildren()" class="mr-2" icon="pi pi-plus" pButton></button>
+              </div>
+            </div>
+
+
           </div>
           <!-- <div class="p-dialog-footer p-p-0 p-mt-3">
             <button pButton label="Lưu" type="submit" icon="pi pi-check" class="mr-2"></button>
