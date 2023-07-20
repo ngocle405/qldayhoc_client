@@ -7,7 +7,7 @@
       "status": true,
       "students": [
         {
-          "stt": 0,
+          "stt": 1,
           "code": "123",
           "name": "123",
           "bith": 47062800000,
@@ -15,12 +15,12 @@
           "gender": true
         },
         {
-          "stt": 1,
-          "code": null,
-          "name": null,
-          "bith": 0,
-          "phone": null,
-          "gender": null
+          "stt": 2,
+          "code": "sv-02",
+          "name": "ngọc lê",
+          "bith": 4986000000,
+          "phone": "0965557149",
+          "gender": false
         }
       ]
     },

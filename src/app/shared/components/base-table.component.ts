@@ -192,6 +192,7 @@ export class BaseTableComponent implements OnDestroy {
   }
   closeForm() {
     this.form?.resetForm();
+    this.form?.reset();
     this.modal.nativeElement.querySelector('button.close').click();
   }
 

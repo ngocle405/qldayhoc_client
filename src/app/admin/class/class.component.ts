@@ -51,15 +51,24 @@ export class ClassComponent extends BaseTableComponent implements OnInit {
   override viewEdit(item: any) {
     this.model = JSON.parse(JSON.stringify(item));
     this.model.students = item.students || [];
+    
     this.model.students.forEach((x:any)=>{
       x.bith = new Date(x.bith);
+      x.stt=x.stt;
+      x.name=x.name;
       return x;
     })
+    console.log(item);
+    console.log(this.form);
+
+  }
+  override closeForm() {
+    this.modal.nativeElement.querySelector('button.close').click();
   }
   override save() {
     this.model.students.forEach((x: any, i: number) => {
       x.bith = new Date(x.bith).getTime();
-      x.stt = i;
+      x.stt = i+1;
     });
     if (this.model.id !== undefined) {
       this.update();
