@@ -63,6 +63,7 @@ export class ClassComponent extends BaseTableComponent implements OnInit {
 
   }
   override closeForm() {
+    
     this.modal.nativeElement.querySelector('button.close').click();
   }
   override save() {
